@@ -100,6 +100,23 @@
             display: flex;
         }
 
+        #agent-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #agent-menu.visible {
+            display: flex;
+        }
+
         .newspaper {
             width: 90%;
             max-width: 1200px;
@@ -493,6 +510,12 @@
         Your browser does not support the audio element.
     </audio>
 
+    <!-- Agent Sound Effect -->
+    <audio id="agent-sound" preload="auto" style="display: none;">
+        <source src="sound/agent.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- Audio Control Button -->
     <button id="audio-control" class="audio-control" title="Click to start music">🎵</button>
 
@@ -504,6 +527,8 @@
             const audio = document.getElementById('background-audio');
             const paperSound = document.getElementById('paper-sound');
             const glassSound = document.getElementById('glass-sound');
+            const typewriteSound = document.getElementById('typewrite-sound');
+            const agentSound = document.getElementById('agent-sound');
             const button = document.getElementById('audio-control');
             let playing = false;
             let hasInteracted = false;
@@ -521,6 +546,18 @@
                 if (glassSound) {
                     glassSound.volume = 0.6;
                     glassSound.load(); // Preload
+                }
+                
+                // Initialize typewriter sound
+                if (typewriteSound) {
+                    typewriteSound.volume = 0.5;
+                    typewriteSound.load(); // Preload
+                }
+                
+                // Initialize agent sound
+                if (agentSound) {
+                    agentSound.volume = 0.7;
+                    agentSound.load(); // Preload
                 }
                 
                 function updateButtonState() {

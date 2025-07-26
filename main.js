@@ -258,6 +258,31 @@ function playTypewriteSound(volume = 0.5) {
     }
 }
 
+function playAgentSound(volume = 0.7) {
+    console.log('🔊 Playing agent sound...');
+    
+    // Initialize audio context first
+    initializeAudioContext();
+    
+    const agentSound = document.getElementById('agent-sound');
+    if (agentSound) {
+        // Stop any currently playing sound and reset
+        agentSound.pause();
+        agentSound.currentTime = 0;
+        agentSound.volume = volume;
+        
+        console.log('🕵️ Agent sound playing at volume:', volume);
+        
+        agentSound.play().then(() => {
+            console.log('✅ Agent sound played successfully');
+        }).catch(e => {
+            console.error('❌ Agent sound failed:', e.name, e.message);
+        });
+    } else {
+        console.error('❌ Agent sound element not found');
+    }
+}
+
 function hideLoadingScreen() {
     const elapsedTime = Date.now() - loadingStartTime;
     const remainingTime = Math.max(0, LOADING_DURATION - elapsedTime);
@@ -421,6 +446,138 @@ mainLoader.load(
                 console.error('❌ Error details:', error.message, error.stack);
             }
         );
+
+        // Load the Agent model
+        console.log('🔧 STARTING AGENT LOADING...');
+        const agentLoader = new GLTFLoader();
+        
+        // Enable all necessary GLTF extensions for proper texture loading
+        agentLoader.register = function(callback) {
+            return callback;
+        };
+        agentLoader.load(
+            'agent/scene.gltf',
+            function(agentGltf) {
+                console.log('✅ AGENT GLTF LOADED SUCCESSFULLY!');
+                console.log('🔍 Agent GLTF content:', agentGltf);
+                console.log('🔍 Agent scene children:', agentGltf.scene.children.length);
+                console.log('🎬 Agent animations:', agentGltf.animations.length, agentGltf.animations);
+                
+                // Position the agent in the center of the scene
+                agentGltf.scene.position.set(-2.1, 0, -1.1); // Moved 2.1m left + 1.6m back (X: -2.1, Z: -1.3->-1.1)
+                agentGltf.scene.scale.set(0.75, 0.75, 0.75); // Reduced by 25% (1.0 -> 0.75)
+                agentGltf.scene.rotation.y = Math.PI + (Math.PI / 2) + Math.PI; // Face towards camera + 90° left + 180° = 270° left (π + π/2 + π)
+                
+                // Store reference to agent
+                agentObject = agentGltf.scene;
+                
+                // Setup animation mixer for the agent
+                let agentMixer = null;
+                if (agentGltf.animations && agentGltf.animations.length > 0) {
+                    agentMixer = new THREE.AnimationMixer(agentGltf.scene);
+                    
+                    // Play all animations (usually there's an idle animation)
+                    agentGltf.animations.forEach((clip, index) => {
+                        console.log(`🎬 Playing agent animation ${index}: ${clip.name}`);
+                        const action = agentMixer.clipAction(clip);
+                        action.play();
+                    });
+                    
+                    // Store mixer reference globally so we can update it in the animation loop
+                    window.agentMixer = agentMixer;
+                    
+                    console.log('✅ Agent animations started successfully!');
+                } else {
+                    console.log('❌ No animations found in agent model');
+                }
+                
+                // Load textures manually since the GLTF uses KHR_materials_pbrSpecularGlossiness
+                const textureLoader = new THREE.TextureLoader();
+                
+                // Load all agent textures
+                const diffuseTexture = textureLoader.load('agent/textures/PackedMaterial0mat_diffuse.png');
+                const normalTexture = textureLoader.load('agent/textures/PackedMaterial0mat_normal.png');
+                const specularTexture = textureLoader.load('agent/textures/PackedMaterial0mat_specularGlossiness.png');
+                
+                // Configure textures properly for GLTF
+                [diffuseTexture, normalTexture, specularTexture].forEach(texture => {
+                    texture.flipY = false; // GLTF standard
+                    texture.wrapS = THREE.RepeatWrapping;
+                    texture.wrapT = THREE.RepeatWrapping;
+                    texture.generateMipmaps = true;
+                    texture.minFilter = THREE.LinearMipmapLinearFilter;
+                    texture.magFilter = THREE.LinearFilter;
+                });
+                
+                console.log('🎨 Loading agent textures manually...');
+                console.log('📸 Diffuse texture:', diffuseTexture);
+                console.log('📸 Normal texture:', normalTexture);
+                console.log('📸 Specular texture:', specularTexture);
+                
+                // Process all meshes in the agent model and apply textures manually
+                agentGltf.scene.traverse(function(node) {
+                    if (node.isMesh) {
+                        node.castShadow = true;
+                        node.receiveShadow = true;
+                        // Ensure userData is set for hover detection
+                        if (!node.userData) {
+                            node.userData = {};
+                        }
+                        node.userData.isAgent = true;
+                        
+                        // Replace the material with a new MeshStandardMaterial using our textures
+                        if (node.material) {
+                            console.log('🔄 Replacing agent material:', node.material.type);
+                            
+                            // Create a new standard material with our manually loaded textures
+                            const newMaterial = new THREE.MeshStandardMaterial({
+                                map: diffuseTexture,
+                                normalMap: normalTexture,
+                                // Convert specular-glossiness to roughness (inverse relationship)
+                                roughnessMap: specularTexture,
+                                roughness: 0.7,
+                                metalness: 0.1,
+                                transparent: false,
+                                side: THREE.FrontSide,
+                                envMapIntensity: 0.8
+                            });
+                            
+                            // Apply the new material
+                            if (Array.isArray(node.material)) {
+                                // Replace all materials in array
+                                node.material = node.material.map(() => newMaterial.clone());
+                            } else {
+                                // Replace single material
+                                node.material = newMaterial;
+                            }
+                            
+                            console.log('✅ Applied new material with textures to:', node.name);
+                        }
+                    }
+                });
+                
+                // Agent lighting removed as requested
+                
+                scene.add(agentGltf.scene);
+                // Force texture loading by ensuring renderer processes materials
+                renderer.compile(agentGltf.scene, camera);
+                
+                // Store reference to agent object for hover effects
+                agentObject = agentGltf.scene;
+                
+                console.log('Agent loaded successfully in center with proper textures!');
+                console.log('🎯 Agent scale:', agentGltf.scene.scale);
+                console.log('📍 Agent position:', agentGltf.scene.position);
+
+            },
+            function(progress) {
+                console.log('📊 Agent loading progress:', (progress.loaded / progress.total * 100) + '%');
+            },
+            function(error) {
+                console.error('❌ ERROR LOADING AGENT:', error);
+                console.error('❌ Error details:', error.message, error.stack);
+            }
+        );
         
         // Start animation after main scene is loaded
     animate();
@@ -440,6 +597,7 @@ let initialCameraPosition = new THREE.Vector3();
 // Global variables for interactive objects
 let mirrorObject = null;
 let typewriterObject = null;
+let agentObject = null;
 
 // Mouse move handler
 function onMouseMove(event) {
@@ -472,6 +630,18 @@ function onMouseMove(event) {
     if (mirrorObject && mirrorObject.userData.material) {
         mirrorObject.userData.material.emissive.setHex(0x000000);
     }
+    
+    // Reset agent
+    if (agentObject) {
+        agentObject.traverse(function(child) {
+            if (child.isMesh && child.material) {
+                const materials = Array.isArray(child.material) ? child.material : [child.material];
+                materials.forEach(material => {
+                    material.emissive.setHex(0x000000);
+                });
+            }
+        });
+    }
 
     // Reset cursor
     document.body.style.cursor = 'default';
@@ -501,16 +671,75 @@ function onMouseMove(event) {
                 document.body.style.cursor = 'pointer';
                 return; // Exit early to avoid multiple effects
             }
+            
+            // Hover effect for agent (global effect)
+            if (object.userData && object.userData.isAgent && agentObject) {
+                // Apply hover effect to all agent meshes
+                agentObject.traverse(function(child) {
+                    if (child.isMesh && child.material) {
+                        const materials = Array.isArray(child.material) ? child.material : [child.material];
+                        materials.forEach(material => {
+                            if (material.emissive) {
+                                material.emissive.setHex(0x333333);
+                            }
+                        });
+                    }
+                });
+                document.body.style.cursor = 'pointer';
+                return; // Exit early to avoid multiple effects
+            }
+            
+            // Additional hover detection for agent - check multiple height levels
+            if (agentObject) {
+                const agentBasePosition = new THREE.Vector3(-2.1, 0, -1.1); // Base position
+                const agentTorsoPosition = new THREE.Vector3(-2.1, 1.0, -1.1); // Torso level
+                const agentHeadPosition = new THREE.Vector3(-2.1, 1.8, -1.1); // Head level
+                
+                // Get mouse position in world space
+                const mouseWorldPos = new THREE.Vector3();
+                mouseWorldPos.setFromMatrixPosition(camera.matrixWorld);
+                
+                // Calculate direction from camera to mouse
+                const direction = new THREE.Vector3();
+                direction.setFromCamera(mouse, camera);
+                
+                // Project mouse position 10 units in front of camera
+                const mousePoint = mouseWorldPos.clone().add(direction.multiplyScalar(10));
+                
+                // Check distance to different parts of the agent
+                const distanceToBase = mousePoint.distanceTo(agentBasePosition);
+                const distanceToTorso = mousePoint.distanceTo(agentTorsoPosition);
+                const distanceToHead = mousePoint.distanceTo(agentHeadPosition);
+                
+                // If mouse is near any part of the agent
+                if (distanceToBase < 1.5 || distanceToTorso < 1.5 || distanceToHead < 1.5) {
+                    // Apply hover effect
+                    agentObject.traverse(function(child) {
+                        if (child.isMesh && child.material) {
+                            const materials = Array.isArray(child.material) ? child.material : [child.material];
+                            materials.forEach(material => {
+                                if (material.emissive) {
+                                    material.emissive.setHex(0x333333);
+                                }
+                            });
+                        }
+                    });
+                    document.body.style.cursor = 'pointer';
+                    return; // Exit early
+                }
+            }
+            
+
         }
     }
 
-    // Calculate camera movement (reduced range and smoother)
+    // Calculate camera movement (increased range for better agent interaction)
     const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
     const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 
     targetCameraPosition.copy(initialCameraPosition);
-    targetCameraPosition.x += mouseX * 0.5; // Reduced from 2 to 0.5
-    targetCameraPosition.y += mouseY * 0.3; // Reduced from 1 to 0.3
+    targetCameraPosition.x += mouseX * 1.2; // Increased from 0.5 to 1.2 for more freedom towards agent
+    targetCameraPosition.y += mouseY * 0.5; // Increased from 0.3 to 0.5 for more vertical freedom
 }
 
 // Documentation menu function
@@ -651,6 +880,193 @@ function showDocumentationMenu() {
         menu.remove();
         resetCameraToBase();
     });
+}
+
+// Agent menu function
+function showAgentMenu() {
+    // Remove any existing menus
+    const existingMenu = document.getElementById('docs-menu');
+    const existingSocialMenu = document.getElementById('social-menu');
+    const existingTypewriterMenu = document.getElementById('typewriter-menu');
+    const existingAgentMenu = document.getElementById('agent-menu');
+    if (existingMenu) existingMenu.remove();
+    if (existingSocialMenu) existingSocialMenu.remove();
+    if (existingTypewriterMenu) existingTypewriterMenu.remove();
+    if (existingAgentMenu) existingAgentMenu.remove();
+
+    // Create menu container
+    const menu = document.createElement('div');
+    menu.id = 'agent-menu';
+    menu.className = 'visible';
+
+    // Create agent interface
+    const agentInterface = document.createElement('div');
+    agentInterface.className = 'newspaper';
+
+    // Add content
+    agentInterface.innerHTML = `
+        <div class="newspaper-header">
+            <h1 class="newspaper-title">Inspector Timothée Blackwood</h1>
+            <div class="newspaper-subtitle">BlackMirror OS AI Agent Interface</div>
+            <div class="quote">"When systems are designed to hide, you need one designed to see."</div>
+        </div>
+        <div class="newspaper-content">
+            <div class="section">
+                <h2 class="section-title">Agent Profile</h2>
+                <div class="section-text">
+                    <strong>Name:</strong> Inspector Timothée Blackwood<br>
+                    <strong>Designation:</strong> BlackMirror Investigation Unit<br>
+                    <strong>Security Clearance:</strong> OMEGA-7<br>
+                    <strong>Specialization:</strong> Digital Forensics & Deep Analysis
+                </div>
+                <div class="highlight-box">
+                    This agent operates with autonomous decision-making capabilities.<br>
+                    All interactions are logged and analyzed.<br>
+                    Unauthorized access attempts will be reported immediately.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Live Chat Interface</h2>
+                <div class="section-text">
+                    You can interact with Inspector Blackwood in real-time. Ask questions about:
+                </div>
+                <ul class="feature-list">
+                    <li><strong>Darknet Analysis:</strong> Market activity, vendor patterns, threat assessment</li>
+                    <li><strong>Digital Forensics:</strong> Pattern recognition, encrypted communication monitoring</li>
+                    <li><strong>Network Intelligence:</strong> Deep web surveillance, social network infiltration</li>
+                    <li><strong>Threat Assessment:</strong> Behavioral prediction algorithms, security protocols</li>
+                </ul>
+                <div class="highlight-box">
+                    The agent doesn't track you. It doesn't remember you.<br>
+                    It doesn't ask why you're asking.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Current Mission Status</h2>
+                <div class="section-text">
+                    <strong>Primary Objective:</strong> Monitor and analyze suspicious digital activities<br>
+                    <strong>Secondary Objective:</strong> Investigate anomalous data patterns<br>
+                    <strong>Tertiary Objective:</strong> Report findings to command structure
+                </div>
+                <div class="section-text">
+                    <strong>Status:</strong> <span style="color: #00ff00;">ACTIVE</span> | 
+                    <strong>Mode:</strong> <span style="color: #00aaff;">INVESTIGATION</span> | 
+                    <strong>Connection:</strong> <span style="color: #00ff00;">SECURE</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Chat Interface</h2>
+                <div id="chat-messages" style="
+                    background: rgba(0, 0, 0, 0.3);
+                    border: 1px solid #0f3460;
+                    padding: 15px;
+                    margin-bottom: 15px;
+                    height: 200px;
+                    overflow-y: auto;
+                    font-family: 'Courier New', monospace;
+                    font-size: 12px;
+                    color: #00ff00;
+                ">
+                    <div style="color: #00aaff;">[SYSTEM] Inspector Blackwood is online and ready for interrogation.</div>
+                    <div style="color: #ffaa00;">[BLACKWOOD] Greetings. I am Inspector Timothée Blackwood, at your service. How may I assist with your investigation today?</div>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="chat-input" placeholder="Type your question here..." style="
+                        flex: 1;
+                        padding: 10px;
+                        background: rgba(0, 0, 0, 0.5);
+                        border: 1px solid #0f3460;
+                        color: #00ff00;
+                        font-family: 'Courier New', monospace;
+                        font-size: 12px;
+                    ">
+                    <button id="send-button" style="
+                        padding: 10px 20px;
+                        background: #0f3460;
+                        border: 1px solid #00ff00;
+                        color: #00ff00;
+                        font-family: 'Courier New', monospace;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    ">Send</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Legal Framework</h2>
+                <div class="section-text">
+                    BlackMirror OS is legal to operate but requires responsible use:
+                </div>
+                <div class="highlight-box warning-text">
+                    The system provides access. You provide intent.<br>
+                    You are the human in the loop and solely accountable for your actions.
+                </div>
+                <div class="section-text">
+                    This isn't a license to break laws. It's a tool for professionals who understand that 
+                    <strong>access to information</strong> and <strong>abuse of information</strong> are fundamentally different.
+                </div>
+            </div>
+        </div>
+    `;
+
+    menu.appendChild(agentInterface);
+
+    // Add close button
+    const closeButton = document.createElement('button');
+    closeButton.className = 'close-button';
+    closeButton.innerHTML = '&times;';
+    closeButton.setAttribute('aria-label', 'Close');
+    menu.appendChild(closeButton);
+
+    // Add to document
+    document.body.appendChild(menu);
+
+    // Handle close button
+    closeButton.addEventListener('click', () => {
+        menu.remove();
+        resetCameraToBase();
+    });
+
+    // Handle chat functionality
+    const chatInput = document.getElementById('chat-input');
+    const sendButton = document.getElementById('send-button');
+    const chatMessages = document.getElementById('chat-messages');
+
+    function addMessage(message, sender, color = '#00ff00') {
+        const messageDiv = document.createElement('div');
+        messageDiv.style.color = color;
+        messageDiv.innerHTML = `[${sender}] ${message}`;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function handleSendMessage() {
+        const message = chatInput.value.trim();
+        if (message) {
+            addMessage(message, 'USER', '#ffaa00');
+            chatInput.value = '';
+            
+            // Simulate typing delay
+            setTimeout(() => {
+                addMessage('Coming soon...', 'BLACKWOOD', '#00aaff');
+            }, 1000);
+        }
+    }
+
+    sendButton.addEventListener('click', handleSendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleSendMessage();
+        }
+    });
+
+    // Focus on input
+    setTimeout(() => {
+        chatInput.focus();
+    }, 500);
 }
 
 // Typewriter menu function
@@ -880,11 +1296,28 @@ function startZoomAnimation(targetPoint, callback, objectType = 'default') {
     
     // Adjust zoom distance based on object type
     let zoomDistance = 1.7; // Reduced from 2 to 1.7 for papers
-    if (objectType === 'mirror') {
-        zoomDistance = 2.6; // Moved back from 2.5 to 2.6 for mirror (1cm back)
+            if (objectType === 'mirror') {
+            zoomDistance = 2.6; // Moved back from 2.5 to 2.6 for mirror (1cm back)
+            // For mirror, position camera properly to look at the mirror surface
+            animationTargetPosition.copy(camera.position).add(direction.multiplyScalar(zoomDistance));
+            // Keep camera at a reasonable height for mirror viewing
+            animationTargetPosition.y = Math.max(animationTargetPosition.y, 0.5);
+            // Ensure agent remains visible by not moving camera too far
+            const agentPosition = new THREE.Vector3(-2.1, 0, -1.1); // Current agent position
+            const distanceToAgent = animationTargetPosition.distanceTo(agentPosition);
+            if (distanceToAgent > 8) { // If too far from agent, adjust
+                const directionToAgent = new THREE.Vector3().subVectors(agentPosition, animationTargetPosition).normalize();
+                animationTargetPosition.add(directionToAgent.multiplyScalar(2)); // Move closer to agent
+            }
+        } else if (objectType === 'agent') {
+            zoomDistance = 2.2; // Slightly further for better view
+            // For agent, position camera towards the head area
+            animationTargetPosition.copy(camera.position).add(direction.multiplyScalar(zoomDistance));
+            animationTargetPosition.y += 1.1; // Higher position to target the head
+            // Keep camera straight (no X adjustment)
+        } else {
+        animationTargetPosition.copy(camera.position).add(direction.multiplyScalar(zoomDistance));
     }
-    
-    animationTargetPosition.copy(camera.position).add(direction.multiplyScalar(zoomDistance));
     
     animationCallback = callback;
 }
@@ -940,6 +1373,14 @@ function onMouseClick(event) {
                 startZoomAnimation(intersect.point, showTypewriterMenu, 'typewriter');
                 return;
             }
+            
+            // Check if clicking on agent
+            if (object.userData && object.userData.isAgent) {
+                console.log('🕵️ Agent clicked!');
+                playAgentSound();
+                startZoomAnimation(intersect.point, showAgentMenu, 'agent');
+                return;
+            }
         }
     }
 }
@@ -960,16 +1401,24 @@ function updateZoomAnimation() {
     // Look at the target point (mirror)
     camera.lookAt(animationTargetLookAt);
     
-    // Animation complete
-    if (progress >= 1) {
-        isAnimating = false;
-        // Re-enable controls
-        controls.enabled = true;
-        if (animationCallback) {
-            animationCallback();
-            animationCallback = null;
+            // Animation complete
+        if (progress >= 1) {
+            isAnimating = false;
+            // Re-enable controls
+            controls.enabled = true;
+            
+            // Ensure agent is still visible after camera movement
+            if (agentObject) {
+                agentObject.visible = true;
+                // Force a render update to ensure agent is visible
+                renderer.render(scene, camera);
+            }
+            
+            if (animationCallback) {
+                animationCallback();
+                animationCallback = null;
+            }
         }
-    }
 }
 
 // Smooth camera animation function
@@ -1043,6 +1492,11 @@ function animate() {
 
     // Update police lights
     updatePoliceLights();
+    
+    // Update agent animations (slowed by 8x)
+    if (window.agentMixer) {
+        window.agentMixer.update(0.016 / 8); // 60fps slowed by 8x (0.016 / 8 = 0.002)
+    }
 
     // Smooth camera movement with increased lerp factor for smoother following
     if (!isAnimating) {
