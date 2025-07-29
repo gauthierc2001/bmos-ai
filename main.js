@@ -701,7 +701,9 @@ function onMouseMove(event) {
                 
                 // Calculate direction from camera to mouse
                 const direction = new THREE.Vector3();
-                direction.setFromCamera(mouse, camera);
+                direction.set(mouse.x, mouse.y, 0.5);
+                direction.unproject(camera);
+                direction.sub(camera.position).normalize();
                 
                 // Project mouse position 10 units in front of camera
                 const mousePoint = mouseWorldPos.clone().add(direction.multiplyScalar(10));
@@ -743,7 +745,8 @@ function onMouseMove(event) {
 }
 
 // Documentation menu function
-function showDocumentationMenu() {
+window.showDocumentationMenu = function() {
+    console.log('Opening Documentation Menu');
     // Remove any existing menus
     const existingMenu = document.getElementById('docs-menu');
     const existingSocialMenu = document.getElementById('social-menu');
@@ -761,6 +764,9 @@ function showDocumentationMenu() {
 
     // Add content
     newspaper.innerHTML = `
+        <div class="menu-close-btn" onclick="closeDocumentationMenu()">✕</div>
+        <div class="menu-nav-arrow menu-nav-left" onclick="navigateToTokenomics()">‹</div>
+        <div class="menu-nav-arrow menu-nav-right" onclick="navigateToTeam()">›</div>
         <div class="newspaper-header">
             <h1 class="newspaper-title">BlackMirror OS</h1>
             <div class="newspaper-subtitle">System Documentation</div>
@@ -882,6 +888,327 @@ function showDocumentationMenu() {
     });
 }
 
+window.showPapersSelectionMenu = function() {
+    // Remove any existing menus
+    const existingMenu = document.getElementById('papers-selection-menu');
+    const existingDocsMenu = document.getElementById('docs-menu');
+    const existingSocialMenu = document.getElementById('social-menu');
+    if (existingMenu) existingMenu.remove();
+    if (existingDocsMenu) existingDocsMenu.remove();
+    if (existingSocialMenu) existingSocialMenu.remove();
+
+    // Create menu container
+    const menu = document.createElement('div');
+    menu.id = 'papers-selection-menu';
+    menu.className = 'visible';
+
+    // Create selection interface
+    const selectionInterface = document.createElement('div');
+    selectionInterface.className = 'papers-selection';
+
+    // Add content
+    selectionInterface.innerHTML = `
+        <div class="menu-close-btn" onclick="closePapersSelectionMenu()">✕</div>
+        <div class="selection-header">
+            <h1 class="selection-title">BlackMirror OS</h1>
+            <div class="selection-subtitle">Choose your access level</div>
+        </div>
+        <div class="selection-options">
+            <div class="option-card" id="docs-option">
+                <div class="option-icon">📄</div>
+                <h3 class="option-title">Documentation</h3>
+                <p class="option-description">System documentation and technical specifications</p>
+            </div>
+            <div class="option-card" id="team-option">
+                <div class="option-icon">👥</div>
+                <h3 class="option-title">Team</h3>
+                <p class="option-description">Team information and collaboration tools</p>
+            </div>
+            <div class="option-card" id="tokenomics-option">
+                <div class="option-icon">💰</div>
+                <h3 class="option-title">Tokenomics</h3>
+                <p class="option-description">Token distribution and economic model</p>
+            </div>
+        </div>
+        <div class="selection-footer">
+            <button class="close-button" onclick="closePapersSelectionMenu()">Close</button>
+        </div>
+    `;
+
+    menu.appendChild(selectionInterface);
+    document.body.appendChild(menu);
+
+    // Add event listeners for options
+    document.getElementById('docs-option').addEventListener('click', function() {
+        closePapersSelectionMenu();
+        showDocumentationMenu();
+    });
+
+    document.getElementById('team-option').addEventListener('click', function() {
+        closePapersSelectionMenu();
+        showTeamMenu();
+    });
+
+    document.getElementById('tokenomics-option').addEventListener('click', function() {
+        closePapersSelectionMenu();
+        showTokenomicsMenu();
+    });
+
+    // Add hover effects
+    const optionCards = document.querySelectorAll('.option-card');
+    optionCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.3)';
+        });
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+        });
+    });
+}
+
+window.closePapersSelectionMenu = function() {
+    const menu = document.getElementById('papers-selection-menu');
+    if (menu) {
+        menu.remove();
+    }
+};
+
+window.closeDocumentationMenu = function() {
+    const menu = document.getElementById('docs-menu');
+    if (menu) {
+        menu.remove();
+    }
+};
+
+window.showTeamMenu = function() {
+    console.log('Opening Team Menu');
+    // Remove any existing menus
+    const existingMenu = document.getElementById('team-menu');
+    const existingDocsMenu = document.getElementById('docs-menu');
+    const existingSelectionMenu = document.getElementById('papers-selection-menu');
+    if (existingMenu) existingMenu.remove();
+    if (existingDocsMenu) existingDocsMenu.remove();
+    if (existingSelectionMenu) existingSelectionMenu.remove();
+
+    // Create menu container
+    const menu = document.createElement('div');
+    menu.id = 'team-menu';
+    menu.className = 'visible';
+
+    // Create team interface
+    const teamInterface = document.createElement('div');
+    teamInterface.className = 'team-interface';
+
+    // Add content
+    teamInterface.innerHTML = `
+        <div class="menu-close-btn" onclick="closeTeamMenu()">✕</div>
+        <div class="menu-nav-arrow menu-nav-left" onclick="navigateToDocumentation()">‹</div>
+        <div class="menu-nav-arrow menu-nav-right" onclick="navigateToTokenomics()">›</div>
+        <div class="team-header">
+            <h1 class="team-title">BlackMirror OS Team</h1>
+            <div class="team-subtitle">Development & Operations</div>
+        </div>
+        <div class="team-content">
+            <div class="team-section">
+                <h2 class="section-title">Core Team</h2>
+                <div class="team-members">
+                    <div class="member-card">
+                        <img src="public/davehatkins.jpg" alt="Dave Hatkins" class="member-avatar">
+                        <h3 class="member-name">Dave Hatkins</h3>
+                        <h4 class="member-title">Chief Marketing Officer (CMO)</h4>
+                        <p class="member-bio">With over a decade in digital marketing and blockchain branding, Dave leads the project's global outreach strategy. He previously scaled user growth for several DeFi startups and is known for his creative campaigns that bridge Web2 and Web3 audiences.</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="public/0xnira.jpg" alt="0xNira" class="member-avatar">
+                        <h3 class="member-name">0xNira</h3>
+                        <h4 class="member-title">Lead Smart Contract Engineer</h4>
+                        <p class="member-bio">A core contributor to multiple audited DeFi protocols, 0xNira specializes in secure Solidity architecture and contract optimization. She focuses on building robust, gas-efficient infrastructure and is passionate about open-source development.</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="public/0xkade.jpg" alt="0xKade" class="member-avatar">
+                        <h3 class="member-name">0xKade</h3>
+                        <h4 class="member-title">Blockchain Protocol Developer</h4>
+                        <p class="member-bio">An early Ethereum contributor turned cross-chain builder, 0xKade works on L2 integrations and protocol scalability. Known for clean code and deep protocol knowledge, he bridges the gap between backend infrastructure and on-chain innovation.</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="public/tylerbrooks.jpg" alt="Tyler Brooks" class="member-avatar">
+                        <h3 class="member-name">Tyler Brooks</h3>
+                        <h4 class="member-title">Head of Community & Partnerships</h4>
+                        <p class="member-bio">Tyler is a crypto-native strategist with a background in community growth and ecosystem alliances. A veteran of multiple DAOs, he specializes in forging partnerships and fostering active, engaged user communities that align with project values.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-section">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-info">
+                    <p>For professional inquiries and collaboration opportunities:</p>
+                    <div class="contact-links">
+                        <a href="https://x.com/BlackMirrorOS" target="_blank" class="contact-link">Twitter</a>
+                        <a href="https://t.me/blackmirroros" target="_blank" class="contact-link">Telegram</a>
+                        <a href="https://medium.com/@blackmirroros" target="_blank" class="contact-link">Medium</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="team-footer">
+            <button class="close-button" onclick="closeTeamMenu()">Close</button>
+        </div>
+    `;
+
+    menu.appendChild(teamInterface);
+    document.body.appendChild(menu);
+}
+
+window.closeTeamMenu = function() {
+    const menu = document.getElementById('team-menu');
+    if (menu) {
+        menu.remove();
+    }
+};
+
+window.showTokenomicsMenu = function() {
+    console.log('Opening Tokenomics Menu');
+    // Remove any existing menus
+    const existingMenu = document.getElementById('tokenomics-menu');
+    const existingDocsMenu = document.getElementById('docs-menu');
+    const existingSelectionMenu = document.getElementById('papers-selection-menu');
+    const existingTeamMenu = document.getElementById('team-menu');
+    if (existingMenu) existingMenu.remove();
+    if (existingDocsMenu) existingDocsMenu.remove();
+    if (existingSelectionMenu) existingSelectionMenu.remove();
+    if (existingTeamMenu) existingTeamMenu.remove();
+
+    // Create menu container
+    const menu = document.createElement('div');
+    menu.id = 'tokenomics-menu';
+    menu.className = 'visible';
+
+    // Create tokenomics interface
+    const tokenomicsInterface = document.createElement('div');
+    tokenomicsInterface.className = 'tokenomics-interface';
+
+    // Add content
+    tokenomicsInterface.innerHTML = `
+        <div class="menu-close-btn" onclick="closeTokenomicsMenu()">✕</div>
+        <div class="menu-nav-arrow menu-nav-left" onclick="navigateToTeam()">‹</div>
+        <div class="menu-nav-arrow menu-nav-right" onclick="navigateToDocumentation()">›</div>
+        <div class="tokenomics-header">
+            <h1 class="tokenomics-title">BlackMirror OS Tokenomics</h1>
+            <div class="tokenomics-subtitle">Token Distribution & Economic Model</div>
+        </div>
+        <div class="tokenomics-content">
+            <div class="tokenomics-section">
+                <h2 class="section-title">Token Distribution</h2>
+                <div class="distribution-grid">
+                    <div class="distribution-item">
+                        <div class="distribution-percentage">85%</div>
+                        <div class="distribution-label">Liquidity Pool</div>
+                        <div class="distribution-description">Initial liquidity for trading</div>
+                    </div>
+                    <div class="distribution-item">
+                        <div class="distribution-percentage">10%</div>
+                        <div class="distribution-label">Team</div>
+                        <div class="distribution-description">Linear unlock over 6 months</div>
+                    </div>
+                    <div class="distribution-item">
+                        <div class="distribution-percentage">5%</div>
+                        <div class="distribution-label">Development & Operations</div>
+                        <div class="distribution-description">Server costs, development, marketing</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tokenomics-section">
+                <h2 class="section-title">Transaction Taxes</h2>
+                <div class="taxes-grid">
+                    <div class="tax-item">
+                        <div class="tax-type">Buy Tax: 3%</div>
+                        <div class="tax-breakdown">
+                            <span>1.5% Buyback</span>
+                            <span>1.5% Treasury</span>
+                        </div>
+                    </div>
+                    <div class="tax-item">
+                        <div class="tax-type">Sell Tax: 3%</div>
+                        <div class="tax-breakdown">
+                            <span>1.5% Buyback</span>
+                            <span>1.5% Treasury</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tokenomics-section">
+                <h2 class="section-title">Economic Model</h2>
+                <div class="economic-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">🔄</div>
+                        <div class="feature-content">
+                            <h3>Buyback Mechanism</h3>
+                            <p>Automatic token buybacks from trading volume to support price stability</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🏦</div>
+                        <div class="feature-content">
+                            <h3>Treasury Fund</h3>
+                            <p>Project development, marketing, and operational expenses</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⏰</div>
+                        <div class="feature-content">
+                            <h3>Vesting Schedule</h3>
+                            <p>Team tokens locked with linear release over 6 months</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tokenomics-footer">
+            <button class="close-button" onclick="closeTokenomicsMenu()">Close</button>
+        </div>
+    `;
+
+    menu.appendChild(tokenomicsInterface);
+    document.body.appendChild(menu);
+}
+
+window.closeTokenomicsMenu = function() {
+    const menu = document.getElementById('tokenomics-menu');
+    if (menu) {
+        menu.remove();
+    }
+};
+
+// Navigation functions with sound - Global scope
+window.navigateToDocumentation = function() {
+    console.log('Navigating to Documentation');
+    playPaperSound();
+    closeTeamMenu();
+    closeTokenomicsMenu();
+    showDocumentationMenu();
+};
+
+window.navigateToTeam = function() {
+    console.log('Navigating to Team');
+    playPaperSound();
+    closeDocumentationMenu();
+    closeTokenomicsMenu();
+    showTeamMenu();
+};
+
+window.navigateToTokenomics = function() {
+    console.log('Navigating to Tokenomics');
+    playPaperSound();
+    closeDocumentationMenu();
+    closeTeamMenu();
+    showTokenomicsMenu();
+};
+
 // Agent menu function
 function showAgentMenu() {
     // Remove any existing menus
@@ -905,6 +1232,7 @@ function showAgentMenu() {
 
     // Add content
     agentInterface.innerHTML = `
+        <div class="menu-close-btn" onclick="closeAgentMenu()">✕</div>
         <div class="newspaper-header">
             <h1 class="newspaper-title">Inspector Timothée Blackwood</h1>
             <div class="newspaper-subtitle">BlackMirror OS AI Agent Interface</div>
@@ -1068,6 +1396,14 @@ function showAgentMenu() {
         chatInput.focus();
     }, 500);
 }
+
+window.closeAgentMenu = function() {
+    const menu = document.getElementById('agent-menu');
+    if (menu) {
+        menu.remove();
+    }
+    resetCameraToBase();
+};
 
 // Typewriter menu function
 function showTypewriterMenu() {
@@ -1264,20 +1600,17 @@ function showSocialMenu() {
     menu.appendChild(socialMirror);
 
     // Add close button
-    const closeButton = document.createElement('button');
-    closeButton.className = 'close-button';
-    closeButton.innerHTML = '&times;';
-    closeButton.setAttribute('aria-label', 'Close');
+    const closeButton = document.createElement('div');
+    closeButton.className = 'menu-close-btn';
+    closeButton.innerHTML = '✕';
+    closeButton.onclick = function() {
+        menu.remove();
+        resetCameraToBase();
+    };
     menu.appendChild(closeButton);
 
     // Add to document
     document.body.appendChild(menu);
-
-    // Handle close button
-    closeButton.addEventListener('click', () => {
-        menu.remove();
-        resetCameraToBase();
-    });
 }
 
 // Animation state
@@ -1362,7 +1695,7 @@ function onMouseClick(event) {
             if (object.name === 'Object_8' || object.parent?.name === 'papers_3' || object.name === 'papers_3') {
                 console.log('📄 Papers clicked!');
                 playPaperSound(); // Play paper sound immediately
-                startZoomAnimation(intersect.point, showDocumentationMenu, 'papers');
+                startZoomAnimation(intersect.point, showPapersSelectionMenu, 'papers');
                 return;
             }
             

@@ -473,6 +473,596 @@
         .corner-logo:hover {
             transform: scale(1.1);
         }
+
+        /* Papers Selection Menu Styles */
+        #papers-selection-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #papers-selection-menu.visible {
+            display: flex;
+        }
+
+        .papers-selection {
+            width: 90%;
+            max-width: 800px;
+            background: #f4e4bc;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 2px solid rgba(20, 20, 20, 0.5);
+            box-shadow: 
+                inset 0 0 50px rgba(20, 20, 20, 0.2),
+                0 0 30px rgba(0, 0, 0, 0.4);
+            background-image: 
+                url('data:image/png;base64,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'),
+                linear-gradient(45deg, #f4e4bc 0%, #f0d998 100%);
+            font-family: 'Times New Roman', serif;
+        }
+
+        .selection-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid rgba(20, 20, 20, 0.3);
+            padding-bottom: 20px;
+        }
+
+        .selection-title {
+            font-family: 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-size: 3em;
+            color: #1a1a1a;
+            text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.2);
+            margin: 0 0 10px 0;
+        }
+
+        .selection-subtitle {
+            font-style: italic;
+            color: #1a1a1a;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .selection-options {
+            display: flex;
+            justify-content: space-around;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .option-card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(20, 20, 20, 0.3);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .option-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(20, 20, 20, 0.5);
+        }
+
+        .option-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .option-title {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.8em;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .option-description {
+            font-size: 1.1em;
+            color: #1a1a1a;
+            line-height: 1.5;
+        }
+
+        .selection-footer {
+            text-align: center;
+            border-top: 2px solid rgba(20, 20, 20, 0.3);
+            padding-top: 20px;
+        }
+
+        /* Team Menu Styles */
+        #team-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #team-menu.visible {
+            display: flex;
+        }
+
+        .team-interface {
+            width: 90%;
+            max-width: 1200px;
+            height: auto;
+            min-height: 600px;
+            background: #f4e4bc;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 2px solid rgba(20, 20, 20, 0.5);
+            box-shadow: 
+                inset 0 0 50px rgba(20, 20, 20, 0.2),
+                0 0 30px rgba(0, 0, 0, 0.4);
+            background-image: 
+                url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwMA7QiYAxi+IlPdqo+hYHnUt5ZPfnsHJyNiDtnpJyayNBkF6cWoYGAMY92U2hXHF/C1M8uP/ZtYdiuj26UdAdQQSXQErwSOMzt/XWRWAz5GuSBIkwG1H3FabJ2OsUOUhGC6tK4EMtJO0ttC6IBD3kM0ve0tJwMdSfjZo+EEISaeTr9P3wYrGjXqyC1krcKdhMpxEnt5JetoulscpyzhXN5FRpuPHvbeQaKxFAEB6EN+cYN6xD7RYGpXpNndMmZgM5Dcs3YSNFDHUo2LGfZuukSWyUYirJAdYbF3MfqEKmjM+I2EfhA94iG3L7uKrR+GdWD73ydlIB+6hgref1QTlmgmbM3/LeX5GI1Ux1RWpgxpLuZ2+I+IjzZ8wqE4nilvQdkUdfhzI5QDWy+kw5Wgg2pGpeEVeCCA7b85BO3F9DzxB3cdqvBzWcmzbyMiqhzuYqtHRVG2y4x+KOlnyqla8AoWWpuBoYRxzXrfKuILl6SfiWCbjxoZJUaCBj1CjH7GIaDbc9kqBY3W/Rgjda1iqQcOJu2WW+76pZC9QG7M00dffe9hNnseupFL53r8F7YHSwJWUKP2q+k7RdsxyOB11n0xtOvnW4irMMFNV4H0uqwS5ExsmP9AxbDTc9JwgneAT5vTiUSm1E7BSflSt3bfa1tv8Di3R8n3Af7MNWzs49hmauE2wP+ttrq+AsWpFG2awvsuOqbipWHgtuvuaAE+A1Z/7gC9hesnr+7wqCwG8c5yAg3AL1fm8T9AZtp/bbJGwl1pNrE7RuOX7PeMRUERVaPpEs+yqeoSmuOlokqw49pgomjLeh7icHNlG19yjs6XXOMedYm5xH2YxpV2tc0Ro2jJfxC50ApuxGob7lMsxfTbeUv07TyYxpeLucEH1gNd4IKH2LAg5TdVhlCafZvpskfncCfx8pOhJzd76bJWeYFnFciwcYfubRc12Ip/ppIhA1/mSZ/RxjFDrJC5xifFjJpY2Xl5zXdguFqYyTR1zSp1Y9p+tktDYYSNflcxI0iyO4TPBdlRcpeqjK/piF5bklq77VSEaA+z8qmJTFzIWiitbnzR794USKBUaT0NTEsVjZqLaFVqJoPN9ODG70IPbfBHKK+/q/AWR0tJzYHRULOa4MP+W/HfGadZUbfw177G7j/OGbIs8TahLyynl4X4RinF793Oz+BU0saXtUHrVBFT/DnA3ctNPoGbs4hRIjTok8i+algT1lTHi4SxFvONKNrgQFAq2/gFnWMXgwffgYMJpiKYkmW3tTg3ZQ9Jq+f8XN+A5eeUKHWvJWJ2sgJ1Sop+wwhqFVijqWaJhwtD8MNlSBeWNNWTa5Z5kPZw5+LbVT99wqTdx29lMUH4OIG/D86ruKEauBjvH5xy6um/Sfj7ei6UUVk4AIl3MyD4MSSTOFgSwsH/QJWaQ5as7ZcmgBZkzjjU1UrQ74ci1gWBCSGHtuV1H2mhSnO3Wp/3fEV5a+4wz//6qy8JxjZsmxxy5+4w9CDNJY09T072iKG0EnOS0arEYgXqYnXcYHwjTtUNAcMelOd4xpkoqiTYICWFq0JSiPfPDQdnt+4/wuqcXY47QILbgAAAABJRU5ErkJggg=='),
+                linear-gradient(45deg, #f4e4bc 0%, #f0d998 100%);
+            font-family: 'Times New Roman', serif;
+        }
+
+
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid rgba(20, 20, 20, 0.3);
+            padding-bottom: 20px;
+        }
+
+        .team-title {
+            font-family: 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-size: 3em;
+            color: #1a1a1a;
+            text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.2);
+            margin: 0 0 10px 0;
+        }
+
+        .team-subtitle {
+            font-style: italic;
+            color: #1a1a1a;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .team-content {
+            flex: 1;
+        }
+
+        .team-section {
+            margin-bottom: 40px;
+        }
+
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .member-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(20, 20, 20, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .member-avatar {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .member-name {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.3em;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .member-role {
+            font-size: 1em;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .status-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(20, 20, 20, 0.3);
+            border-radius: 6px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-label {
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        .status-value {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .status-value.active {
+            background: rgba(0, 255, 0, 0.2);
+            color: #006600;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+        }
+
+        .contact-info p {
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .contact-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid rgba(20, 20, 20, 0.3);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: rgba(20, 20, 20, 0.1);
+            border-color: rgba(20, 20, 20, 0.5);
+        }
+
+        .team-footer {
+            text-align: center;
+            border-top: 2px solid rgba(20, 20, 20, 0.3);
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .back-button, .close-button {
+            background: rgba(20, 20, 20, 0.1);
+            border: 2px solid rgba(20, 20, 20, 0.3);
+            color: #1a1a1a;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .back-button:hover, .close-button:hover {
+            background: rgba(20, 20, 20, 0.2);
+            border-color: rgba(20, 20, 20, 0.5);
+        }
+
+        /* Tokenomics Menu Styles */
+        #tokenomics-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #tokenomics-menu.visible {
+            display: flex;
+        }
+
+        .tokenomics-interface {
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            background: #f4e4bc;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 2px solid rgba(20, 20, 20, 0.5);
+            box-shadow: 
+                inset 0 0 50px rgba(20, 20, 20, 0.2),
+                0 0 30px rgba(0, 0, 0, 0.4);
+            background-image: 
+                url('data:image/png;base64,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'),
+                linear-gradient(45deg, #f4e4bc 0%, #f0d998 100%);
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .tokenomics-interface::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tokenomics-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid rgba(20, 20, 20, 0.3);
+            padding-bottom: 20px;
+        }
+
+        .tokenomics-title {
+            font-family: 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-size: 3em;
+            color: #1a1a1a;
+            text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.2);
+            margin: 0 0 10px 0;
+        }
+
+        .tokenomics-subtitle {
+            font-style: italic;
+            color: #1a1a1a;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .tokenomics-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .tokenomics-section {
+            margin-bottom: 40px;
+        }
+
+        .distribution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .distribution-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(20, 20, 20, 0.3);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .distribution-percentage {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .distribution-label {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.3em;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .distribution-description {
+            font-size: 1em;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        .taxes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tax-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(20, 20, 20, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .tax-type {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.4em;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .tax-breakdown {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+
+        .tax-breakdown span {
+            background: rgba(20, 20, 20, 0.1);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #1a1a1a;
+            border: 1px solid rgba(20, 20, 20, 0.2);
+        }
+
+        .economic-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(20, 20, 20, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            margin-top: 5px;
+        }
+
+        .feature-content h3 {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2em;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .feature-content p {
+            font-size: 0.95em;
+            color: #1a1a1a;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .tokenomics-footer {
+            text-align: center;
+            border-top: 2px solid rgba(20, 20, 20, 0.3);
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Updated Team Member Styles */
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid rgba(20, 20, 20, 0.3);
+        }
+
+        .member-title {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1em;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .member-bio {
+            font-size: 0.9em;
+            color: #1a1a1a;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        /* Menu Navigation Styles */
+        .menu-close-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(244, 228, 188, 0.95);
+            color: #3d2914;
+            border: 2px solid rgba(139, 69, 19, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10002;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .menu-close-btn:hover {
+            background: rgba(244, 228, 188, 1);
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(244, 228, 188, 0.9);
+            color: #3d2914;
+            border: 2px solid rgba(139, 69, 19, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10001;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-nav-arrow:hover {
+            background: rgba(244, 228, 188, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .menu-nav-left {
+            left: 30px;
+        }
+
+        .menu-nav-right {
+            right: 30px;
+        }
+
+        /* Ensure menu containers have relative positioning for absolute positioning of nav elements */
+        .newspaper, .team-interface, .tokenomics-interface, .papers-selection {
+            position: relative;
+        }
     </style>
 </head>
 <body>
