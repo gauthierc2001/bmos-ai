@@ -1240,6 +1240,38 @@ function showAgentMenu() {
         </div>
         <div class="newspaper-content">
             <div class="section">
+                <h2 class="section-title">Connect with Inspector Blackwood</h2>
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="https://app.blackmirroros.xyz/" target="_blank" id="timothee-button" style="
+                        display: inline-block;
+                        padding: 20px 40px;
+                        background: linear-gradient(45deg, #3d2914, #5d3a1a);
+                        border: 2px solid #8b4513;
+                        color: #f4e4bc;
+                        text-decoration: none;
+                        font-family: 'Courier New', monospace;
+                        font-size: 18px;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        letter-spacing: 2px;
+                        cursor: pointer;
+                        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                        box-shadow: 0 0 20px rgba(139, 69, 19, 0.4);
+                        border-radius: 8px;
+                        position: relative;
+                        overflow: hidden;
+                        animation: buttonPulse 2s ease-in-out infinite;
+                    " onmouseover="this.style.background='linear-gradient(45deg, #5d3a1a, #3d2914)'; this.style.boxShadow='0 0 30px rgba(139, 69, 19, 0.7)'; this.style.transform='scale(1.08) translateY(-2px)'; this.style.border='2px solid #d2691e'" onmouseout="this.style.background='linear-gradient(45deg, #3d2914, #5d3a1a)'; this.style.boxShadow='0 0 20px rgba(139, 69, 19, 0.4)'; this.style.transform='scale(1) translateY(0)'; this.style.border='2px solid #8b4513'">
+                        Speak With Timothée
+                    </a>
+                </div>
+                <div class="highlight-box" style="text-align: center; margin-top: 20px;">
+                    Click the button above to access the full BlackMirror OS terminal<br>
+                    and begin your investigation with Inspector Blackwood.
+                </div>
+            </div>
+
+            <div class="section">
                 <h2 class="section-title">Agent Profile</h2>
                 <div class="section-text">
                     <strong>Name:</strong> Inspector Timothée Blackwood<br>
@@ -1286,44 +1318,6 @@ function showAgentMenu() {
             </div>
 
             <div class="section">
-                <h2 class="section-title">Chat Interface</h2>
-                <div id="chat-messages" style="
-                    background: rgba(0, 0, 0, 0.3);
-                    border: 1px solid #0f3460;
-                    padding: 15px;
-                    margin-bottom: 15px;
-                    height: 200px;
-                    overflow-y: auto;
-                    font-family: 'Courier New', monospace;
-                    font-size: 12px;
-                    color: #00ff00;
-                ">
-                    <div style="color: #00aaff;">[SYSTEM] Inspector Blackwood is online and ready for interrogation.</div>
-                    <div style="color: #ffaa00;">[BLACKWOOD] Greetings. I am Inspector Timothée Blackwood, at your service. How may I assist with your investigation today?</div>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <input type="text" id="chat-input" placeholder="Type your question here..." style="
-                        flex: 1;
-                        padding: 10px;
-                        background: rgba(0, 0, 0, 0.5);
-                        border: 1px solid #0f3460;
-                        color: #00ff00;
-                        font-family: 'Courier New', monospace;
-                        font-size: 12px;
-                    ">
-                    <button id="send-button" style="
-                        padding: 10px 20px;
-                        background: #0f3460;
-                        border: 1px solid #00ff00;
-                        color: #00ff00;
-                        font-family: 'Courier New', monospace;
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-                    ">Send</button>
-                </div>
-            </div>
-
-            <div class="section">
                 <h2 class="section-title">Legal Framework</h2>
                 <div class="section-text">
                     BlackMirror OS is legal to operate but requires responsible use:
@@ -1358,43 +1352,7 @@ function showAgentMenu() {
         resetCameraToBase();
     });
 
-    // Handle chat functionality
-    const chatInput = document.getElementById('chat-input');
-    const sendButton = document.getElementById('send-button');
-    const chatMessages = document.getElementById('chat-messages');
 
-    function addMessage(message, sender, color = '#00ff00') {
-        const messageDiv = document.createElement('div');
-        messageDiv.style.color = color;
-        messageDiv.innerHTML = `[${sender}] ${message}`;
-        chatMessages.appendChild(messageDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function handleSendMessage() {
-        const message = chatInput.value.trim();
-        if (message) {
-            addMessage(message, 'USER', '#ffaa00');
-            chatInput.value = '';
-            
-            // Simulate typing delay
-            setTimeout(() => {
-                addMessage('I am now live and ready to assist with your investigation. What would you like to know?', 'BLACKWOOD', '#00aaff');
-            }, 1000);
-        }
-    }
-
-    sendButton.addEventListener('click', handleSendMessage);
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleSendMessage();
-        }
-    });
-
-    // Focus on input
-    setTimeout(() => {
-        chatInput.focus();
-    }, 500);
 }
 
 window.closeAgentMenu = function() {

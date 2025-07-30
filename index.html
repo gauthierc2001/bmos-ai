@@ -84,6 +84,21 @@
             100% { transform: rotate(360deg); }
         }
 
+        @keyframes buttonPulse {
+            0% { 
+                box-shadow: 0 0 20px rgba(139, 69, 19, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(139, 69, 19, 0.6);
+                transform: scale(1.02);
+            }
+            100% { 
+                box-shadow: 0 0 20px rgba(139, 69, 19, 0.4);
+                transform: scale(1);
+            }
+        }
+
         #docs-menu {
             position: fixed;
             top: 0;
