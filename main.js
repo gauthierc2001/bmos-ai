@@ -1030,7 +1030,7 @@ window.showTeamMenu = function() {
                         <img src="public/0xkade.jpg" alt="0xKade" class="member-avatar">
                         <h3 class="member-name">0xKade</h3>
                         <h4 class="member-title">Blockchain Protocol Developer</h4>
-                        <p class="member-bio">An early Ethereum contributor turned cross-chain builder, 0xKade works on L2 integrations and protocol scalability. Known for clean code and deep protocol knowledge, he bridges the gap between backend infrastructure and on-chain innovation.</p>
+                        <p class="member-bio">An early Solana contributor turned cross-chain builder, 0xKade works on L2 integrations and protocol scalability. Known for clean code and deep protocol knowledge, he bridges the gap between backend infrastructure and on-chain innovation.</p>
                     </div>
                     <div class="member-card">
                         <img src="public/tylerbrooks.jpg" alt="Tyler Brooks" class="member-avatar">
