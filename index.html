@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlackMirror OS</title>
-    <link rel="icon" type="image/jpeg" href="public/logo.jpg">
+    <title>Pryv AI</title>
+    <link rel="icon" type="image/jpeg" href="public/newlogo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             overflow: hidden;
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
         #scene-container {
             position: fixed;
@@ -25,22 +28,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #f4e4bc;
+            background: #2a0757;
             background-image: 
-                url('data:image/png;base64,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'),
-                linear-gradient(45deg, #f4e4bc 0%, #f0d998 100%);
+                linear-gradient(135deg, #000000 0%, #2a0757 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #1a1a1a;
+            color: #ffffff;
             font-size: 1.5em;
             z-index: 1000;
-            font-family: 'Times New Roman', serif;
-            border: 2px solid rgba(20, 20, 20, 0.5);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             box-shadow: 
-                inset 0 0 50px rgba(20, 20, 20, 0.2),
-                0 0 30px rgba(0, 0, 0, 0.4);
+                inset 0 0 50px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(42, 7, 87, 0.6);
         }
 
         .welcome-logo {
@@ -48,32 +50,32 @@
             height: 120px;
             margin-bottom: 30px;
             border-radius: 50%;
-            box-shadow: 0 0 30px rgba(20, 20, 20, 0.3);
-            border: 3px solid rgba(20, 20, 20, 0.3);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.3);
         }
 
         .welcome-text {
-            font-family: 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             font-size: 3em;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.2);
-            color: #1a1a1a;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
         }
 
         .welcome-subtitle {
             font-size: 1.4em;
-            opacity: 0.8;
+            opacity: 0.9;
             font-style: italic;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 40px;
         }
 
         .loading-spinner {
             width: 60px;
             height: 60px;
-            border: 4px solid rgba(20, 20, 20, 0.2);
-            border-top: 4px solid #1a1a1a;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid #ffffff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-top: 20px;
@@ -137,23 +139,22 @@
             width: 90%;
             max-width: 1200px;
             height: 85vh;
-            background: #f4e4bc;
+            background: #2a0757;
             position: relative;
             display: flex;
             flex-direction: column;
             padding: 40px;
             box-sizing: border-box;
-            border: 2px solid rgba(20, 20, 20, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 
-                inset 0 0 50px rgba(20, 20, 20, 0.2),
-                0 0 30px rgba(0, 0, 0, 0.4);
+                inset 0 0 50px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(42, 7, 87, 0.6);
             background-image: 
-                url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwMA7QiYAxi+IlPdqo+hYHnUt5ZPfnsHJyNiDtnpJyayNBkF6cWoYGAMY92U2hXHF/C1M8uP/ZtYdiuj26UdAdQQSXQErwSOMzt/XWRWAz5GuSBIkwG1H3FabJ2OsUOUhGC6tK4EMtJO0ttC6IBD3kM0ve0tJwMdSfjZo+EEISaeTr9P3wYrGjXqyC1krcKdhMpxEnt5JetoulscpyzhXN5FRpuPHvbeQaKxFAEB6EN+cYN6xD7RYGpXpNndMmZgM5Dcs3YSNFDHUo2LGfZuukSWyUYirJAdYbF3MfqEKmjM+I2EfhA94iG3L7uKrR+GdWD73ydlIB+6hgref1QTlmgmbM3/LeX5GI1Ux1RWpgxpLuZ2+I+IjzZ8wqE4nilvQdkUdfhzI5QDWy+kw5Wgg2pGpeEVeCCA7b85BO3F9DzxB3cdqvBzWcmzbyMiqhzuYqtHRVG2y4x+KOlnyqla8AoWWpuBoYRxzXrfKuILl6SfiWCbjxoZJUaCBj1CjH7GIaDbc9kqBY3W/Rgjda1iqQcOJu2WW+76pZC9QG7M00dffe9hNnseupFL53r8F7YHSwJWUKP2q+k7RdsxyOB11n0xtOvnW4irMMFNV4H0uqwS5ExsmP9AxbDTc9JwgneAT5vTiUSm1E7BSflSt3bfa1tv8Di3R8n3Af7MNWzs49hmauE2wP+ttrq+AsWpFG2awvsuOqbipWHgtuvuaAE+A1Z/7gC9hesnr+7wqCwG8c5yAg3AL1fm8T9AZtp/bbJGwl1pNrE7RuOX7PeMRUERVaPpEs+yqeoSmuOlokqw49pgomjLeh7icHNlG19yjs6XXOMedYm5xH2YxpV2tc0Ro2jJfxC50ApuxGob7lMsxfTbeUv07TyYxpeLucEH1gNd4IKH2LAg5TdVhlCafZvpskfncCfx8pOhJzd76bJWeYFnFciwcYfubRc12Ip/ppIhA1/mSZ/RxjFDrJC5xifFjJpY2Xl5zXdguFqYyTR1zSp1Y9p+tktDYYSNflcxI0iyO4TPBdlRcpeqjK/piF5bklq77VSEaA+z8qmJTFzIWiitbnzR794USKBUaT0NTEsVjZqLaFVqJoPN9ODG70IPbfBHKK+/q/AWR0tJzYHRULOa4MP+W/HfGadZUbfw177G7j/OGbIs8TahLyynl4X4RinF793Oz+BU0saXtUHrVBFT/DnA3ctNPoGbs4hRIjTok8i+algT1lTHi4SxFvONKNrgQFAq2/gFnWMXgwffgYMJpiKYkmW3tTg3ZQ9Jq+f8XN+A5eeUKHWvJWJ2sgJ1Sop+wwhqFVijqWaJhwtD8MNlSBeWNNWTa5Z5kPZw5+LbVT99wqTdx29lMUH4OIG/D86ruKEauBjvH5xy6um/Sfj7ei6UUVk4AIl3MyD4MSSTOFgSwsH/QJWaQ5as7ZcmgBZkzjjU1UrQ74ci1gWBCSGHtuV1H2mhSnO3Wp/3fEV5a+4wz//6qy8JxjZsmxxy5+4w9CDNJY09T072iKG0EnOS0arEYgXqYnXcYHwjTtUNAcMelOd4xpkoqiTYICWFq0JSiPfPDQdnt+4/wuqcXY47QILbgAAAABJRU5ErkJggg=='),
-                linear-gradient(45deg, #f4e4bc 0%, #f0d998 100%);
+                linear-gradient(135deg, #000000 0%, #2a0757 100%);
             overflow-y: auto;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            font-family: 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         .newspaper::-webkit-scrollbar {
@@ -163,21 +164,22 @@
         .newspaper-header {
             text-align: center;
             margin-bottom: 40px;
-            border-bottom: 2px solid rgba(20, 20, 20, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
             padding-bottom: 20px;
         }
 
         .newspaper-title {
-            font-family: 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             font-size: 4em;
-            color: #1a1a1a;
-            text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.2);
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin: 0 0 10px 0;
+            font-weight: 700;
         }
 
         .newspaper-subtitle {
             font-style: italic;
-            color: #1a1a1a;
+            color: #ffffff;
             font-size: 1.4em;
             margin-top: 10px;
         }
@@ -195,26 +197,29 @@
         }
 
         .section-title {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             font-size: 1.8em;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 15px;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(20, 20, 20, 0.2);
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             padding-bottom: 5px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .section-text {
             font-size: 1.1em;
             line-height: 1.6;
-            color: #1a1a1a;
+            color: #ffffff;
             text-align: justify;
             margin-bottom: 20px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            font-weight: 400;
         }
 
         .highlight-box {
-            background: rgba(20, 20, 20, 0.05);
-            border-left: 3px solid rgba(20, 20, 20, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 3px solid rgba(255, 255, 255, 0.3);
             padding: 15px;
             margin: 20px 0;
         }
@@ -222,7 +227,7 @@
         .quote {
             font-style: italic;
             font-size: 1.2em;
-            color: #1a1a1a;
+            color: #ffffff;
             text-align: center;
             margin: 30px 0;
             padding: 0 40px;
@@ -244,12 +249,32 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        .feature-list strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .newspaper strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .agent-interface strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        #agent-menu strong {
+            color: #ffffff;
+            font-weight: 600;
         }
 
         .warning-text {
             font-weight: bold;
-            color: #1a1a1a;
+            color: #ffffff;
         }
 
         .page-number {
@@ -306,9 +331,9 @@
             right: 20px;
             width: 40px;
             height: 40px;
-            background: rgba(244, 228, 188, 0.9);
-            border: 2px solid rgba(139, 69, 19, 0.5);
-            color: #3d2914;
+            background: rgba(42, 7, 87, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
             font-size: 24px;
             border-radius: 50%;
             cursor: pointer;
@@ -320,8 +345,9 @@
         }
 
         .close-button:hover {
-            background: rgba(139, 69, 19, 0.2);
+            background: rgba(42, 7, 87, 1);
             transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .audio-control {
@@ -330,9 +356,9 @@
             right: 20px;
             width: 50px;
             height: 50px;
-            background: rgba(244, 228, 188, 0.9);
-            border: 2px solid rgba(139, 69, 19, 0.5);
-            color: #3d2914;
+            background: rgba(42, 7, 87, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
             font-size: 20px;
             border-radius: 50%;
             cursor: pointer;
@@ -344,8 +370,9 @@
         }
 
         .audio-control:hover {
-            background: rgba(139, 69, 19, 0.2);
+            background: rgba(42, 7, 87, 1);
             transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .audio-control.muted {
@@ -375,32 +402,32 @@
             max-width: 800px;
             height: auto;
             min-height: 600px;
-            background: #f4e4bc;
+            background: #2a0757;
             padding: 40px;
             box-sizing: border-box;
-            border: 2px solid rgba(20, 20, 20, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 
-                inset 0 0 50px rgba(20, 20, 20, 0.2),
-                0 0 30px rgba(0, 0, 0, 0.4);
+                inset 0 0 50px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(42, 7, 87, 0.6);
             background-image: 
-                url('data:image/png;base64,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'),
-                linear-gradient(45deg, #f4e4bc 0%, #f0d998 100%);
-            font-family: 'Times New Roman', serif;
+                linear-gradient(135deg, #000000 0%, #2a0757 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         .social-header {
             text-align: center;
             margin-bottom: 40px;
-            border-bottom: 2px solid rgba(20, 20, 20, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
             padding-bottom: 20px;
         }
 
         .social-title {
-            font-family: 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             font-size: 3em;
-            color: #3d2914;
-            text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.2);
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin: 0 0 10px 0;
+            font-weight: 700;
         }
 
         .social-links {
@@ -414,17 +441,18 @@
             display: flex;
             align-items: center;
             padding: 20px;
-            background: rgba(20, 20, 20, 0.05);
-            border: 2px solid rgba(20, 20, 20, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 10px;
-            color: #1a1a1a;
+            color: #ffffff;
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
         .social-link:hover {
-            background: rgba(20, 20, 20, 0.1);
+            background: rgba(255, 255, 255, 0.2);
             transform: translateX(10px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
         .social-icon {
@@ -439,13 +467,13 @@
         .social-icon svg {
             width: 100%;
             height: 100%;
-            fill: #1a1a1a;
+            fill: #ffffff;
         }
 
         .social-name {
             font-size: 1.2em;
             font-weight: bold;
-            color: #1a1a1a;
+            color: #ffffff;
         }
 
         /* Turn.js specific styles */
@@ -481,12 +509,14 @@
             height: 60px;
             border-radius: 50%;
             z-index: 1000;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             transition: transform 0.3s ease;
         }
 
         .corner-logo:hover {
             transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
         }
 
         /* Papers Selection Menu Styles */
@@ -509,41 +539,41 @@
 
         .papers-selection {
             width: 90%;
-            max-width: 800px;
-            background: #f4e4bc;
+            max-width: 900px;
+            background: #2a0757;
             position: relative;
             display: flex;
             flex-direction: column;
-            padding: 40px;
+            padding: 30px;
             box-sizing: border-box;
-            border: 2px solid rgba(20, 20, 20, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 
-                inset 0 0 50px rgba(20, 20, 20, 0.2),
-                0 0 30px rgba(0, 0, 0, 0.4);
+                inset 0 0 50px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(42, 7, 87, 0.6);
             background-image: 
-                url('data:image/png;base64,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'),
-                linear-gradient(45deg, #f4e4bc 0%, #f0d998 100%);
-            font-family: 'Times New Roman', serif;
+                linear-gradient(135deg, #000000 0%, #2a0757 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         .selection-header {
             text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 2px solid rgba(20, 20, 20, 0.3);
-            padding-bottom: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 15px;
         }
 
         .selection-title {
-            font-family: 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             font-size: 3em;
-            color: #1a1a1a;
-            text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.2);
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin: 0 0 10px 0;
+            font-weight: 700;
         }
 
         .selection-subtitle {
             font-style: italic;
-            color: #1a1a1a;
+            color: #ffffff;
             font-size: 1.2em;
             margin-top: 10px;
         }
@@ -551,8 +581,8 @@
         .selection-options {
             display: flex;
             justify-content: space-around;
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 25px;
+            margin-bottom: 30px;
         }
 
         .option-card {
@@ -560,7 +590,7 @@
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(20, 20, 20, 0.3);
             border-radius: 10px;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -574,27 +604,27 @@
         }
 
         .option-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
+            font-size: 2.5em;
+            margin-bottom: 15px;
         }
 
         .option-title {
-            font-family: 'Times New Roman', serif;
-            font-size: 1.8em;
-            color: #1a1a1a;
-            margin-bottom: 15px;
-            font-weight: bold;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 1.5em;
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
 
         .option-description {
-            font-size: 1.1em;
-            color: #1a1a1a;
-            line-height: 1.5;
+            font-size: 1em;
+            color: #ffffff;
+            line-height: 1.4;
         }
 
         .selection-footer {
             text-align: center;
-            border-top: 2px solid rgba(20, 20, 20, 0.3);
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
             padding-top: 20px;
         }
 
@@ -621,20 +651,19 @@
             max-width: 1200px;
             height: auto;
             min-height: 600px;
-            background: #f4e4bc;
+            background: #2a0757;
             position: relative;
             display: flex;
             flex-direction: column;
             padding: 40px;
             box-sizing: border-box;
-            border: 2px solid rgba(20, 20, 20, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 
-                inset 0 0 50px rgba(20, 20, 20, 0.2),
-                0 0 30px rgba(0, 0, 0, 0.4);
+                inset 0 0 50px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(42, 7, 87, 0.6);
             background-image: 
-                url('data:image/png;base64,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'),
-                linear-gradient(45deg, #f4e4bc 0%, #f0d998 100%);
-            font-family: 'Times New Roman', serif;
+                linear-gradient(135deg, #000000 0%, #2a0757 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
 
@@ -642,21 +671,22 @@
         .team-header {
             text-align: center;
             margin-bottom: 40px;
-            border-bottom: 2px solid rgba(20, 20, 20, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
             padding-bottom: 20px;
         }
 
         .team-title {
-            font-family: 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             font-size: 3em;
-            color: #1a1a1a;
-            text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.2);
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin: 0 0 10px 0;
+            font-weight: 700;
         }
 
         .team-subtitle {
             font-style: italic;
-            color: #1a1a1a;
+            color: #ffffff;
             font-size: 1.2em;
             margin-top: 10px;
         }
@@ -690,16 +720,16 @@
         }
 
         .member-name {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 1.3em;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 10px;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .member-role {
             font-size: 1em;
-            color: #1a1a1a;
+            color: #ffffff;
             line-height: 1.4;
         }
 
@@ -712,7 +742,7 @@
 
         .status-item {
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(20, 20, 20, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 6px;
             padding: 15px;
             display: flex;
@@ -721,8 +751,8 @@
         }
 
         .status-label {
-            font-weight: bold;
-            color: #1a1a1a;
+            font-weight: 600;
+            color: #ffffff;
         }
 
         .status-value {
@@ -742,7 +772,7 @@
         }
 
         .contact-info p {
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 15px;
         }
 
@@ -753,22 +783,22 @@
         }
 
         .contact-link {
-            color: #1a1a1a;
+            color: #ffffff;
             text-decoration: none;
             padding: 8px 16px;
-            border: 1px solid rgba(20, 20, 20, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 6px;
             transition: all 0.3s ease;
         }
 
         .contact-link:hover {
-            background: rgba(20, 20, 20, 0.1);
-            border-color: rgba(20, 20, 20, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         .team-footer {
             text-align: center;
-            border-top: 2px solid rgba(20, 20, 20, 0.3);
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
             padding-top: 20px;
             display: flex;
             justify-content: center;
@@ -776,14 +806,14 @@
         }
 
         .back-button, .close-button {
-            background: rgba(20, 20, 20, 0.1);
-            border: 2px solid rgba(20, 20, 20, 0.3);
-            color: #1a1a1a;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
             padding: 10px 20px;
             font-size: 1em;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         .back-button:hover, .close-button:hover {
@@ -811,25 +841,22 @@
 
         .tokenomics-interface {
             width: 90%;
-            max-width: 1200px;
-            height: 85vh;
-            background: #f4e4bc;
+            max-width: 1000px;
+            height: auto;
+            min-height: 500px;
+            background: #2a0757;
             position: relative;
             display: flex;
             flex-direction: column;
-            padding: 40px;
+            padding: 30px;
             box-sizing: border-box;
-            border: 2px solid rgba(20, 20, 20, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 
-                inset 0 0 50px rgba(20, 20, 20, 0.2),
-                0 0 30px rgba(0, 0, 0, 0.4);
+                inset 0 0 50px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(42, 7, 87, 0.6);
             background-image: 
-                url('data:image/png;base64,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'),
-                linear-gradient(45deg, #f4e4bc 0%, #f0d998 100%);
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            font-family: 'Times New Roman', serif;
+                linear-gradient(135deg, #000000 0%, #2a0757 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         .tokenomics-interface::-webkit-scrollbar {
@@ -839,21 +866,22 @@
         .tokenomics-header {
             text-align: center;
             margin-bottom: 40px;
-            border-bottom: 2px solid rgba(20, 20, 20, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
             padding-bottom: 20px;
         }
 
         .tokenomics-title {
-            font-family: 'UnifrakturMaguntia', 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             font-size: 3em;
-            color: #1a1a1a;
-            text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.2);
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin: 0 0 10px 0;
+            font-weight: 700;
         }
 
         .tokenomics-subtitle {
             font-style: italic;
-            color: #1a1a1a;
+            color: #ffffff;
             font-size: 1.2em;
             margin-top: 10px;
         }
@@ -884,22 +912,22 @@
 
         .distribution-percentage {
             font-size: 2.5em;
-            font-weight: bold;
-            color: #1a1a1a;
+            font-weight: 700;
+            color: #ffffff;
             margin-bottom: 10px;
         }
 
         .distribution-label {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 1.3em;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 10px;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .distribution-description {
             font-size: 1em;
-            color: #1a1a1a;
+            color: #ffffff;
             line-height: 1.4;
         }
 
@@ -912,17 +940,17 @@
 
         .tax-item {
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(20, 20, 20, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
             padding: 20px;
         }
 
         .tax-type {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 1.4em;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 15px;
-            font-weight: bold;
+            font-weight: 600;
             text-align: center;
         }
 
@@ -933,12 +961,12 @@
         }
 
         .tax-breakdown span {
-            background: rgba(20, 20, 20, 0.1);
+            background: rgba(255, 255, 255, 0.1);
             padding: 8px 12px;
             border-radius: 6px;
             font-size: 0.9em;
-            color: #1a1a1a;
-            border: 1px solid rgba(20, 20, 20, 0.2);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .economic-features {
@@ -950,7 +978,7 @@
 
         .feature-item {
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(20, 20, 20, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
             padding: 20px;
             display: flex;
@@ -964,23 +992,23 @@
         }
 
         .feature-content h3 {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 1.2em;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 8px;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .feature-content p {
             font-size: 0.95em;
-            color: #1a1a1a;
+            color: #ffffff;
             line-height: 1.4;
             margin: 0;
         }
 
         .tokenomics-footer {
             text-align: center;
-            border-top: 2px solid rgba(20, 20, 20, 0.3);
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
             padding-top: 20px;
             display: flex;
             justify-content: center;
@@ -998,17 +1026,17 @@
         }
 
         .member-title {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 1.1em;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 10px;
-            font-weight: bold;
+            font-weight: 600;
             font-style: italic;
         }
 
         .member-bio {
             font-size: 0.9em;
-            color: #1a1a1a;
+            color: #ffffff;
             line-height: 1.5;
             text-align: justify;
         }
@@ -1020,9 +1048,9 @@
             right: 20px;
             width: 50px;
             height: 50px;
-            background: rgba(244, 228, 188, 0.95);
-            color: #3d2914;
-            border: 2px solid rgba(139, 69, 19, 0.7);
+            background: rgba(42, 7, 87, 0.95);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1031,13 +1059,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 10002;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
         }
 
         .menu-close-btn:hover {
-            background: rgba(244, 228, 188, 1);
+            background: rgba(42, 7, 87, 1);
             transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
         }
 
         .menu-nav-arrow {
@@ -1046,9 +1074,9 @@
             transform: translateY(-50%);
             width: 60px;
             height: 60px;
-            background: rgba(244, 228, 188, 0.9);
-            color: #3d2914;
-            border: 2px solid rgba(139, 69, 19, 0.5);
+            background: rgba(42, 7, 87, 0.9);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1057,13 +1085,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 10001;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
         .menu-nav-arrow:hover {
-            background: rgba(244, 228, 188, 1);
+            background: rgba(42, 7, 87, 1);
             transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
         }
 
         .menu-nav-left {
@@ -1082,11 +1110,11 @@
 </head>
 <body>
     <div id="scene-container"></div>
-    <img src="public/logo.jpg" alt="BlackMirrorOS Logo" class="corner-logo">
+    <img src="public/newlogo.jpg" alt="Pryv AI Logo" class="corner-logo">
     <div class="loading-screen">
-        <img src="public/logo.jpg" alt="BlackMirrorOS Logo" class="welcome-logo">
-        <h1 class="welcome-text">Welcome to BlackMirrorOS</h1>
-        <p class="welcome-subtitle">Global intelligence OS for autonomous AI agents</p>
+        <img src="public/newlogo.jpg" alt="Pryv AI Logo" class="welcome-logo">
+        <h1 class="welcome-text">Welcome to Pryv AI</h1>
+        <p class="welcome-subtitle">When systems are built to hide, you need one built to see</p>
         <div class="loading-spinner"></div>
     </div>
 

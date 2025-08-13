@@ -368,7 +368,7 @@ mainLoader.load(
         // Store material reference for hover effect
         mirrorGltf.scene.userData.material = mirrorMaterial;
         
-                const mirrorLight = new THREE.PointLight(0xff7f50, 0.4, 2);
+                const mirrorLight = new THREE.PointLight(0x2a0757, 1.2, 2);
                 mirrorLight.position.set(-1.1, 2.4, -2.2);
                 mirrorLight.castShadow = false;
         scene.add(mirrorLight);
@@ -424,15 +424,15 @@ mainLoader.load(
                 // Store material reference for hover effect
                 typewriterGltf.scene.userData.material = typewriterMaterial;
                 
-                // Add very subtle orange lighting like mirror
-                const typewriterLight = new THREE.PointLight(0xff7f50, 0.075, 2.0); // Reduced intensity by half (0.15->0.075)
+                // Add very subtle purple lighting like mirror
+                const typewriterLight = new THREE.PointLight(0x2a0757, 0.3375, 2.0); // Doubled the intensity for better visibility
                 typewriterLight.position.copy(typewriterGltf.scene.position);
                 typewriterLight.position.y += 0.2;
                 typewriterLight.castShadow = true;
                 scene.add(typewriterLight);
                 
-                // Add very subtle orange ambient light
-                const ambientLight = new THREE.AmbientLight(0xff7f50, 0.025); // Reduced intensity by half (0.05->0.025)
+                // Add very subtle purple ambient light
+                const ambientLight = new THREE.AmbientLight(0x2a0757, 0.075); // Doubled the intensity for better visibility
                 scene.add(ambientLight);
                 
                 scene.add(typewriterGltf.scene);
@@ -768,102 +768,128 @@ window.showDocumentationMenu = function() {
         <div class="menu-nav-arrow menu-nav-left" onclick="navigateToTokenomics()">‹</div>
         <div class="menu-nav-arrow menu-nav-right" onclick="navigateToTeam()">›</div>
         <div class="newspaper-header">
-            <h1 class="newspaper-title">BlackMirror OS</h1>
-            <div class="newspaper-subtitle">System Documentation</div>
-            <div class="quote">"When systems are designed to hide, you need one designed to see."</div>
+            <h1 class="newspaper-title">Pryv AI</h1>
+            <div class="newspaper-subtitle">Operator Manual</div>
+            <div class="quote">"When systems are built to hide, you need one built to see."</div>
         </div>
         <div class="newspaper-content">
             <div class="section">
-                <h2 class="section-title">System Overview</h2>
+                <h2 class="section-title">Why Pryv AI Exists</h2>
                 <div class="section-text">
-                    BlackMirror OS is built for a world where access to information is no longer free. It's filtered, 
-                    ranked, throttled and sometimes outright erased.
+                    We live in a world where free access to information is no longer real. It's filtered, ranked, restricted, or erased.
                 </div>
                 <div class="section-text">
-                    Most search engines give you curated results. Most AI tools won't answer sensitive questions. 
-                    Social platforms shape your feed and tell you they're protecting you.
+                    Search engines feed you curated results. AI refuses "sensitive" questions. Social media shapes your feed "for your safety."
                 </div>
                 <div class="highlight-box">
                     But sometimes, you're not looking for safe answers.<br>
-                    You're looking for the truth, no matter where it's buried.
+                    You're looking for truth. No matter where it's buried.
+                </div>
+                <div class="section-text">
+                    That's why Pryv AI exists. It's a private, decentralized environment that lets you work beyond the polished surface of the internet. It fuses AI, privacy tools and deep/dark web access into one coherent system. One that respects your intelligence, your intent and your right to explore.
                 </div>
             </div>
 
             <div class="section">
-                <h2 class="section-title">Core Architecture</h2>
+                <h2 class="section-title">What Pryv AI Does</h2>
                 <div class="section-text">
-                    The system operates through three integrated components:
+                    Pryv AI is how you ask better questions and actually get answers. It's an AI-powered system that handles complex, uncensored queries, pulling from multiple layers of the web:
                 </div>
                 <ul class="feature-list">
-                    <li><strong>AI Core</strong>: Processes natural language queries and runs on local or distributed networks</li>
-                    <li><strong>Access Layer</strong>: Connects to surface web, deep web and dark web networks</li>
-                    <li><strong>Privacy Engine</strong>: Ensures complete anonymity through encrypted containers</li>
+                    <li><strong>Surface Web</strong>: The public internet</li>
+                    <li><strong>Deep Web</strong>: Unindexed pages & databases</li>
+                    <li><strong>Dark Web</strong>: Built-in Tor, I2P and Freenet access</li>
                 </ul>
                 <div class="section-text">
-                    Each component is designed for maximum autonomy. No cloud accounts. No registration. 
-                    No central server. The system is fully decentralized.
+                    It stores nothing. It logs nothing. Every session is temporary, encrypted and anonymized. If you don't want to be tracked, Pryv makes sure you aren't.
                 </div>
             </div>
 
             <div class="section">
-                <h2 class="section-title">Network Access</h2>
+                <h2 class="section-title">The Built-in AI Agent</h2>
                 <div class="section-text">
-                    BlackMirror OS reaches across multiple network layers:
+                    On the Pryv site, you get a fully operational AI interface. Not a demo bot, but a live node in the system. You can talk to it in plain language. You can ask about black market activity, summaries of exploit chatter, or censored documents.
                 </div>
-                <ul class="feature-list">
-                    <li><strong>Surface Web</strong>: Public internet and indexed content</li>
-                    <li><strong>Deep Web</strong>: Non-indexed databases and hidden services</li>
-                    <li><strong>Dark Web</strong>: Tor, I2P and Freenet networks</li>
-                </ul>
                 <div class="section-text">
-                    The system automatically routes queries through appropriate networks while maintaining 
-                    complete anonymity.
+                    The agent routes your queries through anonymous networks, pulls data from the clear and hidden web, then synthesizes answers via a private engine. Untouched by commercial AI filters.
                 </div>
-            </div>
-
-            <div class="section">
-                <h2 class="section-title">AI Interface</h2>
-                <div class="section-text">
-                    The embedded AI agent processes complex queries without commercial restrictions. It can:
-                </div>
-                <ul class="feature-list">
-                    <li>Analyze darknet market activity and vendor patterns</li>
-                    <li>Monitor exploit forums and emerging threats</li>
-                    <li>Track censored content and leaked documents</li>
-                    <li>Investigate digital surveillance methods</li>
-                </ul>
                 <div class="highlight-box">
                     It doesn't track you.<br>
-                    It doesn't remember you.<br>
+                    It doesn't know you.<br>
                     It doesn't ask why you're asking.
                 </div>
             </div>
 
             <div class="section">
-                <h2 class="section-title">Professional Usage</h2>
+                <h2 class="section-title">How the System Works</h2>
                 <div class="section-text">
-                    BlackMirror OS is designed for professionals working with sensitive information:
+                    Pryv AI is built on three main blocks:
                 </div>
                 <ul class="feature-list">
-                    <li><strong>Security Analysts</strong>: Threat intelligence and exploit monitoring</li>
-                    <li><strong>Investigators</strong>: Digital forensics and pattern analysis</li>
-                    <li><strong>Journalists</strong>: Access to censored material and sources</li>
-                    <li><strong>Researchers</strong>: Deep analysis beyond surface narratives</li>
+                    <li><strong>AI Core</strong>: Handles natural language queries. Runs locally or in a distributed network. Useful, uncensored and data-driven. It analyzes without filtering.</li>
+                    <li><strong>Access Layer</strong>: Opens forbidden doors. Access .onion services, I2P forums, whistleblower caches, anonymous live feeds and more.</li>
+                    <li><strong>Privacy Engine</strong>: Makes you invisible. Encrypted containers, random routing, zero-trace execution. When a query is done, it's wiped.</li>
                 </ul>
+                <div class="section-text">
+                    No accounts. No central servers. Nobody can switch it off or watch it run. You're in full control.
+                </div>
             </div>
 
             <div class="section">
-                <h2 class="section-title">Legal Framework</h2>
+                <h2 class="section-title">Use Cases</h2>
                 <div class="section-text">
-                    BlackMirror OS is legal to operate but requires responsible use:
+                    Pryv AI is built for people who work with sensitive data, unconventional sources, or in hostile environments:
+                </div>
+                <ul class="feature-list">
+                    <li><strong>Cyber threat intel</strong>: Live monitoring of ransomware networks & exploit forums</li>
+                    <li><strong>Black market analysis</strong>: Tracking prices, sellers and laundering routes</li>
+                    <li><strong>Investigative journalism</strong>: Digging into censored files & anonymous sources</li>
+                    <li><strong>Geopolitical research</strong>: When official narratives don't match ground reality</li>
+                    <li><strong>Privacy audits</strong>: Testing anonymity tools, analyzing surveillance patterns</li>
+                </ul>
+                <div class="section-text">
+                    Pryv lets you uncover what's buried. Without burning yourself.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Who It's For (and Who It's Not)</h2>
+                <div class="section-text">
+                    This isn't for casual curiosity or bored exploration. It's for:
+                </div>
+                <ul class="feature-list">
+                    <li>Analysts who want answers, not headlines</li>
+                    <li>Researchers working under pressure or censorship</li>
+                    <li>Journalists chasing trails someone wants erased</li>
+                    <li>Privacy defenders building shields</li>
+                    <li>Operators who understand responsibility</li>
+                </ul>
+                <div class="section-text">
+                    If you're on the darknet for kicks, look elsewhere. If your goal is to harm. Pryv won't stop you, but it won't cover you. Pryv is neutral. You're not. Act accordingly.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Legal & Ethical Frame</h2>
+                <div class="section-text">
+                    Running Pryv AI is legal. What you do with it depends on where you are and what you access.
                 </div>
                 <div class="highlight-box warning-text">
-                    The system provides access. You provide intent.<br>
-                    You are the human in the loop and solely accountable for your actions.
+                    The system doesn't make moral choices. It responds.<br>
+                    You're the only conscience in the loop.
                 </div>
                 <div class="section-text">
-                    This isn't a license to break laws. It's a tool for professionals who understand that 
-                    <strong>access to information</strong> and <strong>abuse of information</strong> are fundamentally different.
+                    This is not a license to break laws. It's a reminder: censorship isn't protection and access isn't intent.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Final Word</h2>
+                <div class="section-text">
+                    Most systems block dangerous questions. This one lets you ask them. You won't find it on app stores. You won't see YouTube tutorials. You won't get a warning before something disturbs you.
+                </div>
+                <div class="highlight-box">
+                    That's the point.
                 </div>
             </div>
         </div>
@@ -910,7 +936,7 @@ window.showPapersSelectionMenu = function() {
     selectionInterface.innerHTML = `
         <div class="menu-close-btn" onclick="closePapersSelectionMenu()">✕</div>
         <div class="selection-header">
-            <h1 class="selection-title">BlackMirror OS</h1>
+            <h1 class="selection-title">Pryv AI</h1>
             <div class="selection-subtitle">Choose your access level</div>
         </div>
         <div class="selection-options">
@@ -1007,7 +1033,7 @@ window.showTeamMenu = function() {
         <div class="menu-nav-arrow menu-nav-left" onclick="navigateToDocumentation()">‹</div>
         <div class="menu-nav-arrow menu-nav-right" onclick="navigateToTokenomics()">›</div>
         <div class="team-header">
-            <h1 class="team-title">BlackMirror OS Team</h1>
+            <h1 class="team-title">Pryv AI Team</h1>
             <div class="team-subtitle">Development & Operations</div>
         </div>
         <div class="team-content">
@@ -1096,66 +1122,34 @@ window.showTokenomicsMenu = function() {
         <div class="menu-nav-arrow menu-nav-left" onclick="navigateToTeam()">‹</div>
         <div class="menu-nav-arrow menu-nav-right" onclick="navigateToDocumentation()">›</div>
         <div class="tokenomics-header">
-            <h1 class="tokenomics-title">BlackMirror OS Tokenomics</h1>
-            <div class="tokenomics-subtitle">Token Distribution & Economic Model</div>
+            <h1 class="tokenomics-title">Pryv AI Tokenomics</h1>
+            <div class="tokenomics-subtitle">$PRYV Token Distribution & Economic Model</div>
         </div>
         <div class="tokenomics-content">
             <div class="tokenomics-section">
                 <h2 class="section-title">Token Distribution</h2>
                 <div class="distribution-grid">
                     <div class="distribution-item">
-                        <div class="distribution-percentage">85%</div>
+                        <div class="distribution-percentage">90%</div>
                         <div class="distribution-label">Liquidity Pool</div>
-                        <div class="distribution-description">Initial liquidity for trading</div>
+                        <div class="distribution-description">Initial liquidity for trading on Solana</div>
                     </div>
                     <div class="distribution-item">
                         <div class="distribution-percentage">10%</div>
                         <div class="distribution-label">Team</div>
                         <div class="distribution-description">Linear unlock over 6 months</div>
                     </div>
-                    <div class="distribution-item">
-                        <div class="distribution-percentage">5%</div>
-                        <div class="distribution-label">Development & Operations</div>
-                        <div class="distribution-description">Server costs, development, marketing</div>
-                    </div>
                 </div>
             </div>
             
             <div class="tokenomics-section">
-                <h2 class="section-title">Transaction Taxes</h2>
-                <div class="taxes-grid">
-                    <div class="tax-item">
-                        <div class="tax-type">Buy Tax: 3%</div>
-                        <div class="tax-breakdown">
-                            <span>1.5% Buyback</span>
-                            <span>1.5% Treasury</span>
-                        </div>
-                    </div>
-                    <div class="tax-item">
-                        <div class="tax-type">Sell Tax: 3%</div>
-                        <div class="tax-breakdown">
-                            <span>1.5% Buyback</span>
-                            <span>1.5% Treasury</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tokenomics-section">
                 <h2 class="section-title">Economic Model</h2>
                 <div class="economic-features">
-                    <div class="feature-item">
-                        <div class="feature-icon">🔄</div>
-                        <div class="feature-content">
-                            <h3>Buyback Mechanism</h3>
-                            <p>Automatic token buybacks from trading volume to support price stability</p>
-                        </div>
-                    </div>
                     <div class="feature-item">
                         <div class="feature-icon">🏦</div>
                         <div class="feature-content">
                             <h3>Treasury Fund</h3>
-                            <p>Project development, marketing, and operational expenses</p>
+                            <p>Project development, marketing and operational expenses</p>
                         </div>
                     </div>
                     <div class="feature-item">
@@ -1234,101 +1228,94 @@ function showAgentMenu() {
     agentInterface.innerHTML = `
         <div class="menu-close-btn" onclick="closeAgentMenu()">✕</div>
         <div class="newspaper-header">
-            <h1 class="newspaper-title">Inspector Timothée Blackwood</h1>
-            <div class="newspaper-subtitle">BlackMirror OS AI Agent Interface</div>
-            <div class="quote">"When systems are designed to hide, you need one designed to see."</div>
+            <h1 class="newspaper-title">Pryv AI Agent</h1>
+            <div class="newspaper-subtitle">Live Node Interface</div>
+            <div class="quote">"When systems are built to hide, you need one built to see."</div>
         </div>
         <div class="newspaper-content">
             <div class="section">
-                <h2 class="section-title">Connect with Inspector Blackwood</h2>
-                <div style="text-align: center; margin: 30px 0;">
-                    <a href="https://app.blackmirroros.xyz/" target="_blank" id="timothee-button" style="
-                        display: inline-block;
-                        padding: 20px 40px;
-                        background: linear-gradient(45deg, #3d2914, #5d3a1a);
-                        border: 2px solid #8b4513;
-                        color: #f4e4bc;
-                        text-decoration: none;
-                        font-family: 'Courier New', monospace;
-                        font-size: 18px;
-                        font-weight: bold;
-                        text-transform: uppercase;
-                        letter-spacing: 2px;
-                        cursor: pointer;
-                        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                        box-shadow: 0 0 20px rgba(139, 69, 19, 0.4);
-                        border-radius: 8px;
-                        position: relative;
-                        overflow: hidden;
-                        animation: buttonPulse 2s ease-in-out infinite;
-                    " onmouseover="this.style.background='linear-gradient(45deg, #5d3a1a, #3d2914)'; this.style.boxShadow='0 0 30px rgba(139, 69, 19, 0.7)'; this.style.transform='scale(1.08) translateY(-2px)'; this.style.border='2px solid #d2691e'" onmouseout="this.style.background='linear-gradient(45deg, #3d2914, #5d3a1a)'; this.style.boxShadow='0 0 20px rgba(139, 69, 19, 0.4)'; this.style.transform='scale(1) translateY(0)'; this.style.border='2px solid #8b4513'">
-                        Speak With Timothée
-                    </a>
-                </div>
-                <div class="highlight-box" style="text-align: center; margin-top: 20px;">
-                    Click the button above to access the full BlackMirror OS terminal<br>
-                    and begin your investigation with Inspector Blackwood.
-                </div>
-            </div>
-
-            <div class="section">
-                <h2 class="section-title">Agent Profile</h2>
+                <h2 class="section-title">The Built-in AI Agent</h2>
                 <div class="section-text">
-                    <strong>Name:</strong> Inspector Timothée Blackwood<br>
-                    <strong>Designation:</strong> BlackMirror Investigation Unit<br>
-                    <strong>Security Clearance:</strong> OMEGA-7<br>
-                    <strong>Specialization:</strong> Digital Forensics & Deep Analysis
+                    On the Pryv site, you get a fully operational AI interface. Not a demo bot, but a live node in the system. You can talk to it in plain language. You can ask about black market activity, summaries of exploit chatter, or censored documents.
+                </div>
+                <div class="section-text">
+                    The agent routes your queries through anonymous networks, pulls data from the clear and hidden web, then synthesizes answers via a private engine. Untouched by commercial AI filters.
                 </div>
                 <div class="highlight-box">
-                    This agent operates with autonomous decision-making capabilities.<br>
-                    All interactions are logged and analyzed.<br>
-                    Unauthorized access attempts will be reported immediately.
-                </div>
-            </div>
-
-            <div class="section">
-                <h2 class="section-title">Live Chat Interface</h2>
-                <div class="section-text">
-                    You can interact with Inspector Blackwood in real-time. Ask questions about:
-                </div>
-                <ul class="feature-list">
-                    <li><strong>Darknet Analysis:</strong> Market activity, vendor patterns, threat assessment</li>
-                    <li><strong>Digital Forensics:</strong> Pattern recognition, encrypted communication monitoring</li>
-                    <li><strong>Network Intelligence:</strong> Deep web surveillance, social network infiltration</li>
-                    <li><strong>Threat Assessment:</strong> Behavioral prediction algorithms, security protocols</li>
-                </ul>
-                <div class="highlight-box">
-                    The agent doesn't track you. It doesn't remember you.<br>
+                    It doesn't track you.<br>
+                    It doesn't know you.<br>
                     It doesn't ask why you're asking.
                 </div>
             </div>
 
             <div class="section">
-                <h2 class="section-title">Current Mission Status</h2>
-                <div class="section-text">
-                    <strong>Primary Objective:</strong> Monitor and analyze suspicious digital activities<br>
-                    <strong>Secondary Objective:</strong> Investigate anomalous data patterns<br>
-                    <strong>Tertiary Objective:</strong> Report findings to command structure
+                <h2 class="section-title">Access the Agent</h2>
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="https://app.blackmirroros.xyz/" target="_blank" id="agent-button" style="
+                        display: inline-block;
+                        padding: 20px 40px;
+                        background: linear-gradient(45deg, #2a0757, #4a0a8f);
+                        border: 2px solid rgba(255, 255, 255, 0.3);
+                        color: #ffffff;
+                        text-decoration: none;
+                        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                        font-size: 18px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 2px;
+                        cursor: pointer;
+                        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                        box-shadow: 0 0 20px rgba(42, 7, 87, 0.4);
+                        border-radius: 8px;
+                        position: relative;
+                        overflow: hidden;
+                    " onmouseover="this.style.background='linear-gradient(45deg, #4a0a8f, #2a0757)'; this.style.boxShadow='0 0 30px rgba(42, 7, 87, 0.7)'; this.style.transform='scale(1.08) translateY(-2px)'; this.style.border='2px solid rgba(255, 255, 255, 0.5)'" onmouseout="this.style.background='linear-gradient(45deg, #2a0757, #4a0a8f)'; this.style.boxShadow='0 0 20px rgba(42, 7, 87, 0.4)'; this.style.transform='scale(1) translateY(0)'; this.style.border='2px solid rgba(255, 255, 255, 0.3)'">
+                        Connect to Pryv AI
+                    </a>
                 </div>
+                <div class="highlight-box" style="text-align: center; margin-top: 20px;">
+                    Click to access the full Pryv AI terminal<br>
+                    and begin your uncensored investigation.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">What You Can Ask</h2>
                 <div class="section-text">
-                    <strong>Status:</strong> <span style="color: #00ff00;">ACTIVE</span> | 
-                    <strong>Mode:</strong> <span style="color: #00aaff;">INVESTIGATION</span> | 
-                    <strong>Connection:</strong> <span style="color: #00ff00;">SECURE</span>
+                    The agent handles complex, uncensored queries across multiple layers:
+                </div>
+                <ul class="feature-list">
+                    <li><strong>Surface Web:</strong> Public internet analysis and monitoring</li>
+                    <li><strong>Deep Web:</strong> Unindexed pages, databases and hidden content</li>
+                    <li><strong>Dark Web:</strong> .onion services, I2P forums, anonymous networks</li>
+                    <li><strong>Threat Intelligence:</strong> Ransomware networks, exploit forums, black markets</li>
+                    <li><strong>Investigative Research:</strong> Censored documents, whistleblower caches</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Privacy & Anonymity</h2>
+                <div class="section-text">
+                    Every session is temporary, encrypted and anonymized. The system stores nothing, logs nothing and leaves no trace of your queries or identity.
+                </div>
+                <div class="highlight-box">
+                    No accounts. No central servers.<br>
+                    Nobody can switch it off or watch it run.<br>
+                    You're in full control.
                 </div>
             </div>
 
             <div class="section">
                 <h2 class="section-title">Legal Framework</h2>
                 <div class="section-text">
-                    BlackMirror OS is legal to operate but requires responsible use:
+                    Running Pryv AI is legal. What you do with it depends on where you are and what you access.
                 </div>
                 <div class="highlight-box warning-text">
-                    The system provides access. You provide intent.<br>
-                    You are the human in the loop and solely accountable for your actions.
+                    The system doesn't make moral choices. It responds.<br>
+                    You're the only conscience in the loop.
                 </div>
                 <div class="section-text">
-                    This isn't a license to break laws. It's a tool for professionals who understand that 
-                    <strong>access to information</strong> and <strong>abuse of information</strong> are fundamentally different.
+                    This is not a license to break laws. It's a reminder: censorship isn't protection and access isn't intent.
                 </div>
             </div>
         </div>
@@ -1394,18 +1381,18 @@ function showTypewriterMenu() {
         width: 90%;
         max-width: 800px;
         height: 85vh;
-        background: #f4e4bc;
+        background: #2a0757;
         position: relative;
         display: flex;
         flex-direction: column;
         padding: 40px;
         box-sizing: border-box;
-        border: 2px solid rgba(20, 20, 20, 0.5);
+        border: 2px solid rgba(255, 255, 255, 0.3);
         box-shadow: 
-            inset 0 0 50px rgba(20, 20, 20, 0.2),
-            0 0 30px rgba(0, 0, 0, 0.4);
-        background-image: linear-gradient(45deg, #f4e4bc 0%, #f0d998 100%);
-        font-family: 'Courier New', monospace;
+            inset 0 0 50px rgba(0, 0, 0, 0.3),
+            0 0 30px rgba(42, 7, 87, 0.6);
+        background-image: linear-gradient(135deg, #000000 0%, #2a0757 100%);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         overflow-y: auto;
     `;
 
@@ -1413,31 +1400,31 @@ function showTypewriterMenu() {
     typewriterHeader.style.cssText = `
         text-align: center;
         margin-bottom: 30px;
-        border-bottom: 2px solid rgba(20, 20, 20, 0.3);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         padding-bottom: 20px;
     `;
     typewriterHeader.innerHTML = `
-        <h1 style="font-family: 'Times New Roman', serif; font-size: 3em; color: #1a1a1a; margin: 0;">BlackMirror LLM</h1>
-        <p style="font-style: italic; color: #1a1a1a; font-size: 1.2em; margin-top: 10px;">Initializing system...</p>
+        <h1 style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 3em; color: #ffffff; margin: 0; font-weight: 700;">Pryv AI LLM</h1>
+        <p style="font-style: italic; color: #ffffff; font-size: 1.2em; margin-top: 10px;">Initializing system...</p>
     `;
 
     const typewriterContent = document.createElement('div');
     typewriterContent.style.cssText = `
         width: 100%;
         height: 400px;
-        font-family: 'Courier New', monospace;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: 16px;
         line-height: 1.8;
         background: transparent;
         border: none;
         outline: none;
-        color: #1a1a1a;
+        color: #ffffff;
         letter-spacing: 1px;
         white-space: pre-wrap;
         overflow-y: auto;
     `;
     
-    const text = "BlackMirror LLM - The Future of AI Interaction\n\nAccess to our advanced language model will require $BMOS tokens:\n\n- Standard Queries: 0.5 $BMOS\n- Advanced Analysis: 10 $BMOS\n\nUnlock the power of truly autonomous AI with BlackMirror LLM.\nLaunch date to be announced.";
+    const text = "Pryv AI LLM - The Future of AI Interaction\n\nAccess to our advanced language model will require $PRYV tokens:\n\n- Standard Queries: 0.5 $PRYV\n- Advanced Analysis: 10 $PRYV\n\nUnlock the power of truly autonomous AI with Pryv AI LLM.\nLaunch date to be announced.";
     typewriterContent.textContent = '';
     
     // Typing animation function
@@ -1469,9 +1456,9 @@ function showTypewriterMenu() {
         right: 20px;
         width: 40px;
         height: 40px;
-        background: rgba(244, 228, 188, 0.9);
-        border: 2px solid rgba(139, 69, 19, 0.5);
-        color: #3d2914;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: #ffffff;
         font-size: 24px;
         border-radius: 50%;
         cursor: pointer;
@@ -1515,7 +1502,7 @@ function showSocialMenu() {
     // Add content
     socialMirror.innerHTML = `
         <div class="social-header">
-            <h1 class="newspaper-title">BlackMirror OS</h1>
+            <h1 class="newspaper-title">Pryv AI</h1>
             <div class="newspaper-subtitle">Social Networks</div>
         </div>
         <div class="social-links">
@@ -1870,4 +1857,5 @@ function initializeCameraPositions() {
 }
 
 // Add to your scene initialization code (after camera setup)
+initializeCameraPositions(); 
 initializeCameraPositions(); 
