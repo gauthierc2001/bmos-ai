@@ -1072,9 +1072,8 @@ window.showTeamMenu = function() {
                 <div class="contact-info">
                     <p>For professional inquiries and collaboration opportunities:</p>
                     <div class="contact-links">
-                        <a href="https://x.com/BlackMirrorOS" target="_blank" class="contact-link">Twitter</a>
-                        <a href="https://t.me/blackmirroros" target="_blank" class="contact-link">Telegram</a>
-                        <a href="https://medium.com/@blackmirroros" target="_blank" class="contact-link">Medium</a>
+                                        <a href="https://x.com/pryvai" target="_blank" class="contact-link">Twitter</a>
+                <span class="contact-link">Telegram - Coming Soon</span>
                     </div>
                 </div>
             </div>
@@ -1507,7 +1506,7 @@ function showSocialMenu() {
         </div>
         <div class="social-links">
             <!-- FIXED: Correct social links -->
-            <a href="https://x.com/BlackMirrorOS" target="_blank" class="social-link">
+            <a href="https://x.com/pryvai" target="_blank" class="social-link">
                 <div class="social-icon">
                     <svg viewBox="0 0 24 24">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -1523,22 +1522,14 @@ function showSocialMenu() {
                 </div>
                 <span class="social-name">Discord - Coming Soon</span>
             </div>
-            <a href="https://medium.com/@blackmirroros" target="_blank" class="social-link">
-                <div class="social-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
-                    </svg>
-                </div>
-                <span class="social-name">Medium</span>
-            </a>
-            <a href="https://t.me/blackmirroros" target="_blank" class="social-link">
+            <div class="social-link" style="opacity: 0.6; cursor: default;">
                 <div class="social-icon">
                     <svg viewBox="0 0 24 24">
                         <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                     </svg>
                 </div>
-                <span class="social-name">Telegram</span>
-            </a>
+                <span class="social-name">Telegram - Coming Soon</span>
+            </div>
         </div>
     `;
 
@@ -1857,5 +1848,6 @@ function initializeCameraPositions() {
 }
 
 // Add to your scene initialization code (after camera setup)
+initializeCameraPositions(); 
 initializeCameraPositions(); 
 initializeCameraPositions(); 
