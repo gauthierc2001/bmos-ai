@@ -1250,7 +1250,7 @@ function showAgentMenu() {
             <div class="section">
                 <h2 class="section-title">Access the Agent</h2>
                 <div style="text-align: center; margin: 30px 0;">
-                    <a href="https://app.blackmirroros.xyz/" target="_blank" id="agent-button" style="
+                    <a href="https://pryv.live/" target="_blank" id="agent-button" style="
                         display: inline-block;
                         padding: 20px 40px;
                         background: linear-gradient(45deg, #2a0757, #4a0a8f);
